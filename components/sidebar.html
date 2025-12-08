@@ -1,0 +1,185 @@
+<!-- Reusable Animated Sidebar Component -->
+<!-- Add this CSS to your page's <style> section -->
+<style id="sidebar-styles">
+    /* Sidebar animations */
+    .sidebar {
+        transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    }
+    
+    .sidebar-hidden {
+        transform: translateX(-100%);
+    }
+    
+    @media (max-width: 768px) {
+        .sidebar {
+            position: fixed;
+            z-index: 50;
+            height: 100vh;
+        }
+    }
+    
+    /* Smooth hover effects */
+    .nav-link {
+        transition: all 0.2s ease-in-out;
+        position: relative;
+    }
+    
+    .nav-link:hover {
+        transform: translateX(4px);
+    }
+    
+    .nav-link.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 70%;
+        background: #13b6ec;
+        border-radius: 0 4px 4px 0;
+    }
+    
+    /* Overlay for mobile */
+    .sidebar-overlay {
+        transition: opacity 0.3s ease-in-out;
+    }
+</style>
+
+<!-- Mobile overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden sidebar-overlay"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none">
+    <!-- Logo Header -->
+    <div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+        <div class="flex items-center gap-3">
+            <div class="size-8 text-primary">
+                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+                </svg>
+            </div>
+            <h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+        </div>
+        <!-- Close button for mobile -->
+        <button id="closeSidebar" class="md:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="flex-1 overflow-y-auto p-4 space-y-1">
+        <a href="home.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="home">
+            <span class="material-symbols-outlined text-xl">home</span>
+            <span>Home</span>
+        </a>
+        <a href="itemlisting.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="itemlisting">
+            <span class="material-symbols-outlined text-xl">shopping_bag</span>
+            <span>Rent Out</span>
+        </a>
+        <a href="add.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="add">
+            <span class="material-symbols-outlined text-xl">add_box</span>
+            <span>Rent In</span>
+        </a>
+        <a href="travel.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="travel">
+            <span class="material-symbols-outlined text-xl">directions_car</span>
+            <span>Travel Sharing</span>
+        </a>
+        <a href="userddash.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="userddash">
+            <span class="material-symbols-outlined text-xl">dashboard</span>
+            <span>Dashboard</span>
+        </a>
+    </nav>
+
+    <!-- User Profile Section -->
+    <div class="mt-auto border-t border-gray-200 dark:border-gray-800 p-4">
+        <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+            <div class="bg-gradient-to-br from-primary to-blue-500 rounded-full size-10 flex items-center justify-center text-white font-bold">
+                FA
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">Faheem Akbar</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 truncate">fammyalpha@gmail.com</p>
+            </div>
+            <button class="flex items-center justify-center rounded-lg h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                <span class="material-symbols-outlined text-gray-600 dark:text-gray-400 text-xl">more_vert</span>
+            </button>
+        </div>
+    </div>
+</aside>
+
+<!-- Add this JavaScript to your page before closing </body> -->
+<script id="sidebar-script">
+    // ===== SIDEBAR TOGGLE FUNCTIONALITY =====
+    (function() {
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const menuToggle = document.getElementById('menuToggle');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+        
+        // Set active link based on current page
+        const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'home';
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            const page = link.getAttribute('data-page');
+            if (page === currentPage) {
+                link.classList.add('active', 'bg-primary/10', 'text-primary', 'font-bold');
+                link.classList.remove('text-gray-700', 'dark:text-gray-300', 'font-medium');
+            }
+        });
+        
+        // Open sidebar on mobile
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.remove('sidebar-hidden');
+                sidebarOverlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        // Close sidebar function
+        function closeSidebarFunc() {
+            sidebar.classList.add('sidebar-hidden');
+            sidebarOverlay.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close sidebar on mobile
+        if (closeSidebarBtn) {
+            closeSidebarBtn.addEventListener('click', closeSidebarFunc);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeSidebarFunc);
+        }
+        
+        // Close sidebar on route navigation (mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    closeSidebarFunc();
+                }
+            });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('sidebar-hidden');
+                sidebarOverlay.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            } else {
+                if (!sidebarOverlay.classList.contains('hidden')) {
+                    return; // Keep sidebar open if user opened it
+                }
+                sidebar.classList.add('sidebar-hidden');
+            }
+        });
+        
+        // Initialize sidebar state on mobile
+        if (window.innerWidth < 768) {
+            sidebar.classList.add('sidebar-hidden');
+        }
+    })();
+</script>

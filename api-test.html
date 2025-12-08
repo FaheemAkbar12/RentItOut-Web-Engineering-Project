@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend API Test - RentItOut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">RentItOut Backend API Test</h1>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">API Connection Status</h2>
+            <div id="statusIndicator" class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-gray-400 rounded-full"></div>
+                <span>Checking connection...</span>
+            </div>
+            <div id="serverInfo" class="mt-4 hidden"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <button onclick="testHealth()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Test Health Endpoint
+            </button>
+            <button onclick="testItems()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                Test Items API
+            </button>
+            <button onclick="testTravel()" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">
+                Test Travel API
+            </button>
+            <button onclick="testAuth()" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                Test Authentication
+            </button>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4">Test Results</h2>
+            <div id="results" class="bg-gray-50 p-4 rounded font-mono text-sm overflow-auto max-h-96">
+                Click a test button to see results...
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        const resultsDiv = document.getElementById('results');
+        const statusDiv = document.getElementById('statusIndicator');
+        const serverInfoDiv = document.getElementById('serverInfo');
+
+        function log(message, type = 'info') {
+            const colors = {
+                info: 'text-blue-600',
+                success: 'text-green-600',
+                error: 'text-red-600',
+                warning: 'text-orange-600'
+            };
+            
+            const timestamp = new Date().toLocaleTimeString();
+            resultsDiv.innerHTML += `<div class="${colors[type]}">[${timestamp}] ${message}</div>`;
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        async function checkConnection() {
+            try {
+                const response = await fetch('http://localhost:5000/health');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusDiv.innerHTML = `
+                        <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-green-600 font-semibold">Connected</span>
+                    `;
+                    serverInfoDiv.innerHTML = `
+                        <div class="text-sm text-gray-600">
+                            <p><strong>Status:</strong> ${data.status}</p>
+                            <p><strong>Environment:</strong> ${data.environment}</p>
+                            <p><strong>API URL:</strong> http://localhost:5000/api/v1</p>
+                        </div>
+                    `;
+                    serverInfoDiv.classList.remove('hidden');
+                    log('✓ Backend server is running', 'success');
+                } else {
+                    throw new Error('Server responded with error');
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                    <span class="text-red-600 font-semibold">Disconnected</span>
+                `;
+                serverInfoDiv.innerHTML = `
+                    <div class="text-sm text-red-600">
+                        <p>Backend server is not running!</p>
+                        <p class="mt-2">Please start the server:</p>
+                        <code class="block bg-gray-100 p-2 mt-1 rounded">cd "d:\\Web Project\\backend" && npm run dev</code>
+                    </div>
+                `;
+                serverInfoDiv.classList.remove('hidden');
+                log('✗ Cannot connect to backend server', 'error');
+            }
+        }
+
+        async function testHealth() {
+            log('Testing health endpoint...', 'info');
+            try {
+                const response = await fetch('http://localhost:5000/health');
+                const data = await response.json();
+                log('✓ Health check successful:', 'success');
+                log(JSON.stringify(data, null, 2), 'info');
+            } catch (error) {
+                log('✗ Health check failed: ' + error.message, 'error');
+            }
+        }
+
+        async function testItems() {
+            log('Testing items API...', 'info');
+            try {
+                const response = await api.items.getAll({ limit: 5 });
+                log('✓ Items API working:', 'success');
+                log(JSON.stringify(response, null, 2), 'info');
+                log(`Found ${response.data.items.length} items`, 'success');
+            } catch (error) {
+                log('✗ Items API failed: ' + error.message, 'error');
+            }
+        }
+
+        async function testTravel() {
+            log('Testing travel API...', 'info');
+            try {
+                const response = await api.travel.getAll({ limit: 5 });
+                log('✓ Travel API working:', 'success');
+                log(JSON.stringify(response, null, 2), 'info');
+                log(`Found ${response.data.travels.length} travel listings`, 'success');
+            } catch (error) {
+                log('✗ Travel API failed: ' + error.message, 'error');
+            }
+        }
+
+        async function testAuth() {
+            log('Testing authentication...', 'info');
+            if (authService.isAuthenticated()) {
+                log('✓ User is authenticated', 'success');
+                log('User ID: ' + authService.getUserId(), 'info');
+                log('User Email: ' + authService.getUserEmail(), 'info');
+                log('Display Name: ' + authService.getDisplayName(), 'info');
+                
+                // Test getting user profile from backend
+                try {
+                    const response = await api.users.getProfile();
+                    log('✓ User profile retrieved from backend:', 'success');
+                    log(JSON.stringify(response, null, 2), 'info');
+                } catch (error) {
+                    log('⚠ Could not get user profile: ' + error.message, 'warning');
+                }
+            } else {
+                log('⚠ User is not authenticated', 'warning');
+                log('Please log in at Login.html first', 'info');
+            }
+        }
+
+        // Check connection on page load
+        window.addEventListener('load', () => {
+            checkConnection();
+            
+            // Check auth status
+            window.addEventListener('authReady', () => {
+                if (authService.isAuthenticated()) {
+                    log('User authenticated: ' + authService.getDisplayName(), 'success');
+                } else {
+                    log('No user authenticated', 'warning');
+                }
+            });
+        });
+
+        // Recheck connection every 10 seconds
+        setInterval(checkConnection, 10000);
+    </script>
+</body>
+</html>

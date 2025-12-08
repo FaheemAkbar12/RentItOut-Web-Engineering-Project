@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Ride - RentItOut</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+    <div class="min-h-screen flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
+            <div class="flex items-center gap-4 px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+                <div class="size-6 text-primary">
+                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+            </div>
+            <nav class="p-4">
+                <a href="home.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
+                    <span class="material-symbols-outlined">home</span> Home
+                </a>
+                <a href="itemlisting.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
+                    <span class="material-symbols-outlined">shopping_bag</span> Rent Out
+                </a>
+                <a href="add.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
+                    <span class="material-symbols-outlined">add_box</span> Rent In
+                </a>
+                <a href="travel.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 bg-primary/10 text-primary font-bold">
+                    <span class="material-symbols-outlined">directions_car</span> Travel Sharing
+                </a>
+                <a href="userddash.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-6">
+                    <h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">Post a Ride</h1>
+                    <p class="text-gray-600 dark:text-gray-400">Share your journey and earn by offering rides</p>
+                </div>
+
+                <form id="rideForm" class="bg-white dark:bg-gray-900 rounded-xl shadow-sm p-8 space-y-6">
+                    <!-- Route Details -->
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Route Details</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Origin City *
+                                </label>
+                                <select id="origin" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+                                    <option value="">Select origin</option>
+                                    <option>Karachi</option>
+                                    <option>Lahore</option>
+                                    <option>Islamabad</option>
+                                    <option>Rawalpindi</option>
+                                    <option>Faisalabad</option>
+                                    <option>Multan</option>
+                                    <option>Peshawar</option>
+                                    <option>Quetta</option>
+                                    <option>Sialkot</option>
+                                    <option>Gujranwala</option>
+                                    <option>Hyderabad</option>
+                                    <option>Abbottabad</option>
+                                    <option>Murree</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Destination City *
+                                </label>
+                                <select id="destination" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+                                    <option value="">Select destination</option>
+                                    <option>Karachi</option>
+                                    <option>Lahore</option>
+                                    <option>Islamabad</option>
+                                    <option>Rawalpindi</option>
+                                    <option>Faisalabad</option>
+                                    <option>Multan</option>
+                                    <option>Peshawar</option>
+                                    <option>Quetta</option>
+                                    <option>Sialkot</option>
+                                    <option>Gujranwala</option>
+                                    <option>Hyderabad</option>
+                                    <option>Abbottabad</option>
+                                    <option>Murree</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Departure Details -->
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Departure Details</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Departure Date *
+                                </label>
+                                <input type="date" id="departureDate" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Departure Time *
+                                </label>
+                                <input type="time" id="departureTime" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing & Seats -->
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Pricing & Availability</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Price per Seat (USD) *
+                                </label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                                    <input type="number" id="price" min="1" step="1" placeholder="35" class="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Available Seats *
+                                </label>
+                                <select id="seats" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+                                    <option value="1">1 seat</option>
+                                    <option value="2">2 seats</option>
+                                    <option value="3">3 seats</option>
+                                    <option value="4">4 seats</option>
+                                    <option value="5">5 seats</option>
+                                    <option value="6">6 seats</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Details -->
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Vehicle Details</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Vehicle Make
+                                </label>
+                                <input type="text" id="vehicleMake" placeholder="Toyota" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Model
+                                </label>
+                                <input type="text" id="vehicleModel" placeholder="Corolla" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                    Color
+                                </label>
+                                <input type="text" id="vehicleColor" placeholder="White" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">Amenities</h2>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="ac" class="rounded border-gray-300 text-primary focus:ring-primary"/>
+                                <span class="text-gray-700 dark:text-gray-300">Air Conditioning</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="wifi" class="rounded border-gray-300 text-primary focus:ring-primary"/>
+                                <span class="text-gray-700 dark:text-gray-300">WiFi</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="music" class="rounded border-gray-300 text-primary focus:ring-primary"/>
+                                <span class="text-gray-700 dark:text-gray-300">Music</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="petFriendly" class="rounded border-gray-300 text-primary focus:ring-primary"/>
+                                <span class="text-gray-700 dark:text-gray-300">Pet Friendly</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="snacks" class="rounded border-gray-300 text-primary focus:ring-primary"/>
+                                <span class="text-gray-700 dark:text-gray-300">Snacks</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Additional Notes (Optional)
+                        </label>
+                        <textarea id="notes" rows="3" placeholder="Any specific requirements or information for passengers..." class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"></textarea>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div id="errorMessage" class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 px-4 py-3 rounded-lg"></div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-4 pt-4">
+                        <button type="submit" class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                            Post Ride
+                        </button>
+                        <button type="button" onclick="window.location.href='travel.html'" class="px-6 py-3 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        const form = document.getElementById('rideForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            const departureDate = document.getElementById('departureDate').value;
+            const departureTime = document.getElementById('departureTime').value;
+            const price = document.getElementById('price').value;
+            const seats = document.getElementById('seats').value;
+            
+            // Validation
+            if (!origin || !destination || !departureDate || !departureTime || !price) {
+                showError('Please fill in all required fields');
+                return;
+            }
+            
+            if (origin === destination) {
+                showError('Origin and destination cannot be the same');
+                return;
+            }
+            
+            if (parseFloat(price) <= 0) {
+                showError('Price must be greater than 0');
+                return;
+            }
+            
+            // Get amenities
+            const amenities = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
+            
+            // Combine date and time
+            const departureDateTime = new Date(`${departureDate}T${departureTime}`);
+            
+            // Create ride object matching backend schema
+            const rideData = {
+                route: {
+                    origin: {
+                        city: origin,
+                        state: 'Pakistan'
+                    },
+                    destination: {
+                        city: destination,
+                        state: 'Pakistan'
+                    }
+                },
+                departureTime: departureDateTime.toISOString(),
+                seating: {
+                    totalSeats: parseInt(seats),
+                    availableSeats: parseInt(seats)
+                },
+                pricing: {
+                    pricePerSeat: parseFloat(price),
+                    currency: 'USD'
+                },
+                vehicle: {
+                    make: document.getElementById('vehicleMake').value,
+                    model: document.getElementById('vehicleModel').value,
+                    color: document.getElementById('vehicleColor').value
+                },
+                luggage: {
+                    allowedBags: 2
+                },
+                amenities: amenities,
+                notes: document.getElementById('notes').value,
+                driver: {
+                    userId: 'user_' + Date.now(),
+                    name: 'Current User',
+                    rating: 4.8,
+                    reviewCount: 0
+                }
+            };
+            
+            console.log('Posting ride:', rideData);
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Posting...';
+            
+            try {
+                // Try to post to backend
+                const response = await api.travel.create(rideData);
+                console.log('Ride created:', response);
+                alert('✅ Ride posted successfully!');
+                window.location.href = 'travel.html';
+            } catch (error) {
+                console.error('Error posting ride:', error);
+                
+                // Fallback: Store in localStorage for demo
+                const localRides = JSON.parse(localStorage.getItem('localRides') || '[]');
+                localRides.push({
+                    ...rideData,
+                    id: 'local_' + Date.now(),
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem('localRides', JSON.stringify(localRides));
+                
+                alert('✅ Ride posted successfully! (Stored locally - start backend server to save permanently)');
+                window.location.href = 'travel.html';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Post Ride';
+            }
+        });
+        
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.remove('hidden');
+            setTimeout(() => {
+                errorMessage.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

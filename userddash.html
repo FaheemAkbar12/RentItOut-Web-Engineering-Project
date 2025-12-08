@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentItOut Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13b6ec",
+              "background-light": "#f6f8f8",
+              "background-dark": "#101d22",
+              "success": "#2ECC71",
+              "warning": "#F39C12",
+              "info": "#95A5A6",
+              "danger": "#E74C3C"
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full group/design-root overflow-x-hidden">
+<div class="flex flex-1">
+<aside class="w-64 flex-col bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 hidden md:flex">
+<div class="flex items-center gap-4 px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">RentItOut</h2>
+</div>
+<nav class="flex-1 px-4 py-6">
+ 
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white text-sm font-medium" href="home.html">
+<span class="material-symbols-outlined text-xl">home</span>
+<span>Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white text-sm font-medium" href="itemlisting.html">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors" href="add.html">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span>Rent In</span>
+</a>
+
+</li>
+<li>
+<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white text-sm font-medium" href="travel.html">
+<span class="material-symbols-outlined text-xl">flight</span>
+<span>Travel Sharing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-primary dark:text-primary bg-primary/10 dark:bg-primary/10 text-sm font-bold" href="userddash.html">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+</ul>
+
+</nav>
+<div class="mt-auto p-4 border-t border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDP2JWABigKsNHekCBc0XMQcKL4HHg134bWiDX0pM2GF6O81xGC-temAoIn1msf1gqQQlNxSQ4kgRej6ZpQScm5bNJXpWHn2BD_e4PSvUIuYtVSkCnsWrnVbRD3kAibinr7_JvMbApJzLUiAUP_BYJSeUG_n2HnAKT26HVd4l3ticBn2kLhhS2j5ZtURZgR-z4mF0XJulER193vlFSpWz4jdm8jBU0T5ptyMqG3BSxM3OqT7kzik-KIbvnvRGyzYKuqru82GrNhi58");'></div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Faheem Akbar</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">fammyalpha@gmail.com</p>
+</div>
+<button class="ml-auto flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-gray-800 dark:text-gray-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400">notifications</span>
+</button>
+</div>
+</div>
+</aside>
+<div class="flex flex-col flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-gray-200 dark:border-b-gray-700 px-6 sm:px-10 py-3 bg-white dark:bg-background-dark/50 backdrop-blur-sm sticky top-0 z-10 md:justify-end">
+<div class="flex items-center gap-4 text-gray-900 dark:text-white md:hidden">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">RentItOut</h2>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0">
+<span class="material-symbols-outlined text-xl">chat_bubble</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2bIYQmO_rjGxM-H1BTmLE4ZLvXEnZcmQKcGP3N4FVTMkLHqX6z6YkyzY_5pJXkrsfEYoVhRg5fqbnTq9hHQ-ResObCqEw22OoMg3Cv6gl_lOwyC1kGbOzNUxopeuIQ0QFJzjH7V4NJZdU85wdXuztxyvh5Avd5RHYOV2wW6hp6hQhOmgOCbUBoElzI4oPWXAwGR9yI2RVMT7Ot8da31fd4rgLcl1QDLmmWEhVTDVjrCXFudLeyYnvfgVzfztOw9BMLKPmI6dKuG0");'></div>
+</div>
+</header>
+<main class="px-4 sm:px-6 lg:px-8 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-5xl flex-1 gap-8">
+<div class="flex flex-wrap justify-between gap-4 items-center">
+<div class="flex min-w-72 flex-col gap-1">
+<p class="text-gray-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Welcome back, Faheem!</p>
+<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal">Here's a summary of your activity on RentItOut.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+<p class="text-gray-800 dark:text-gray-300 text-base font-medium leading-normal">Active Rentals</p>
+<p class="text-gray-900 dark:text-white tracking-light text-3xl font-bold leading-tight">3</p>
+</div>
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+<p class="text-gray-800 dark:text-gray-300 text-base font-medium leading-normal">Pending Requests</p>
+<p class="text-gray-900 dark:text-white tracking-light text-3xl font-bold leading-tight">2</p>
+</div>
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-6 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+<p class="text-gray-800 dark:text-gray-300 text-base font-medium leading-normal">Upcoming Trips</p>
+<p class="text-gray-900 dark:text-white tracking-light text-3xl font-bold leading-tight">1</p>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="border-b border-gray-200 dark:border-gray-700">
+<div class="flex gap-4 sm:gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-3 pt-2" href="itemdetail.html">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">My Items</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 pb-3 pt-2" href="itemdetail.html">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">My Rentals</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 pb-3 pt-2" href="travel.html">
+<p class="text-sm font-bold leading-normal tracking-[0.015em]">My Travel</p>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-5">
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">My Items for Rent</h2>
+<div class="flex gap-3 w-full sm:w-auto">
+<button onclick="window.location.href='add.html'" class="flex items-center justify-center rounded-lg h-10 bg-primary text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] px-4 flex-1 sm:flex-none" >
+<span class="material-symbols-outlined text-lg">add</span>
+<span>List Item</span>
+</button>
+<button onclick="window.location.href='addride.html'" class="flex items-center justify-center rounded-lg h-10 bg-green-600 hover:bg-green-700 text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] px-4 flex-1 sm:flex-none" >
+<span class="material-symbols-outlined text-lg">directions_car</span>
+<span>Post Ride</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+<div class="w-full h-48 bg-cover bg-center" data-alt="High-end camera on a wooden table" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBw61V0TpaIgE8hbJqNnCXzx6mFxMmnyKdYvNHw7zFU-cB4gZMh1Olw1DXWgt0zPLomC4rWfLW2sIn1ONtzKzronW3Y59b6HrvKesj-2vbLSPHjs8EdN32FzYFV5IUiNYVGfVWLFrBqz0O0CnAFbnmfEWpN3jJvE4pOddXVUCTepSyh6euft5cBxmI4U5S_8QBfgm8bkjlxPxdvwO4t3bppQnYmNFMBktxPelEQMNHydvqm8L-dDReefTmRCU2pZ856TlsNXBCvepU')"></div>
+<div class="p-4 flex flex-col flex-grow gap-3">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-gray-800 dark:text-gray-100">Professional DSLR Camera</h3>
+<span class="text-xs font-bold text-white bg-success rounded-full px-2.5 py-1">Available</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Rented from May 20 - May 25</p>
+<div class="flex gap-2 mt-auto pt-2">
+<button class="flex-1 flex items-center justify-center rounded-lg h-9 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-bold leading-normal">View Details</button>
+<button class="flex-1 flex items-center justify-center rounded-lg h-9 bg-primary/20 text-primary text-sm font-bold leading-normal">Message Renter</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+<div class="w-full h-48 bg-cover bg-center" data-alt="Camping tent set up in a forest" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCanVqMa7SP_Rs424zUZkj8Phigz8Zs1SUSThrZMk1fZYlGSYE8nA5wa3KkcpzN4lYQKZoif4VpsTPgs3pOlbYXsj5Bj9JJSiZ02rVcQOtXrouxwEgdiAxFegYV6BccmmgMswpVVs-4PQaKDnaKjjbWLM6odxSPgTK5TAOPoEjDwtPjScHeLdSQgLvl95G8r8j5ZXnmLIMrWNC-UwgoS8SGKw9L868l_4zRqUxFkn1yvaevchS5WR0SiBg3VyQF_hQ3MTwtBKOgLQo')"></div>
+<div class="p-4 flex flex-col flex-grow gap-3">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-gray-800 dark:text-gray-100">4-Person Camping Tent</h3>
+<span class="text-xs font-bold text-gray-800 dark:text-gray-900 bg-warning rounded-full px-2.5 py-1">Rented Out</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Next available on June 10</p>
+<div class="flex gap-2 mt-auto pt-2">
+<button class="flex-1 flex items-center justify-center rounded-lg h-9 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-bold leading-normal">View Details</button>
+<button class="flex-1 flex items-center justify-center rounded-lg h-9 bg-primary/20 text-primary text-sm font-bold leading-normal">Message Renter</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800/50 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl text-center p-6 gap-3">
+<div class="flex items-center justify-center size-12 bg-gray-200 dark:bg-gray-700 rounded-full">
+<span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-2xl">add</span>
+</div>
+<h3 class="font-bold text-gray-800 dark:text-gray-200">List a New Item <a href="add.html"></a></h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Have something to share? List it now and start earning.</p>
+<button class="w-full flex items-center justify-center rounded-lg mt-2 h-9 bg-primary text-white text-sm font-bold leading-normal">List Item</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+
+<script>
+  // Header notification and chat buttons
+  const notificationBtn = document.querySelector('button .material-symbols-outlined:first-child');
+  const chatBtn = document.querySelectorAll('button .material-symbols-outlined')[1];
+  
+  if (notificationBtn && notificationBtn.textContent === 'notifications') {
+    notificationBtn.parentElement.addEventListener('click', function() {
+      console.log('Notifications clicked');
+    });
+  }
+  
+  if (chatBtn && chatBtn.textContent === 'chat_bubble') {
+    chatBtn.parentElement.addEventListener('click', function() {
+      console.log('Chat clicked');
+    });
+  }
+  
+  // Tab switching (My Items, My Rentals, My Travel)
+  const tabs = document.querySelectorAll('.flex.gap-4 a');
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', function(e) {
+      // Remove active state from all tabs
+      tabs.forEach(t => {
+        t.classList.remove('border-b-primary', 'text-primary');
+        t.classList.add('border-b-transparent', 'text-gray-500');
+      });
+      
+      // Add active state to clicked tab
+      this.classList.add('border-b-primary', 'text-primary');
+      this.classList.remove('border-b-transparent', 'text-gray-500');
+      
+      const tabName = this.querySelector('p').textContent;
+      console.log('Tab switched to:', tabName);
+      
+      // In real app, would load different content
+      if (tabName === 'My Rentals') {
+        e.preventDefault();
+      } else if (tabName === 'My Travel') {
+        // Allow navigation to travel.html
+      }
+    });
+  });
+  
+  // List a New Item button (in header)
+  const listNewItemBtn = document.querySelector('button span');
+  if (listNewItemBtn && listNewItemBtn.textContent.includes('List a New Item')) {
+    listNewItemBtn.parentElement.addEventListener('click', function() {
+      console.log('List New Item clicked');
+      window.location.href = 'add.html';
+    });
+  }
+  
+  // Statistics cards click
+  const statCards = document.querySelectorAll('.rounded-xl.p-6.border');
+  statCards.forEach((card, index) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function() {
+      const title = this.querySelector('p').textContent;
+      const value = this.querySelectorAll('p')[1].textContent;
+      console.log('Stat card clicked:', title, value);
+    });
+  });
+  
+  // View Details buttons on item cards
+  const viewDetailsButtons = document.querySelectorAll('button');
+  viewDetailsButtons.forEach((btn, index) => {
+    if (btn.textContent.includes('View Details')) {
+      btn.addEventListener('click', function() {
+        console.log('View Details clicked for item:', index);
+        window.location.href = 'itemdetail.html?id=' + (index + 1);
+      });
+    }
+  });
+  
+  // Message Renter buttons
+  const messageButtons = document.querySelectorAll('button');
+  messageButtons.forEach((btn, index) => {
+    if (btn.textContent.includes('Message Renter')) {
+      btn.addEventListener('click', function() {
+        console.log('Message Renter clicked');
+      });
+    }
+  });
+  
+  // List Item button in the "add new item" card
+  const listItemButtons = document.querySelectorAll('button');
+  listItemButtons.forEach(btn => {
+    if (btn.textContent.trim() === 'List Item') {
+      btn.addEventListener('click', function() {
+        console.log('List Item clicked');
+        window.location.href = 'add.html';
+      });
+    }
+  });
+  
+  // Status badge click
+  const statusBadges = document.querySelectorAll('span.rounded-full');
+  statusBadges.forEach(badge => {
+    badge.style.cursor = 'pointer';
+    badge.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const status = this.textContent;
+      console.log('Status badge clicked:', status);
+    });
+  });
+  
+  // Item cards hover effect
+  const itemCards = document.querySelectorAll('.flex.flex-col.bg-white');
+  itemCards.forEach(card => {
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-4px)';
+      this.style.transition = 'transform 0.3s ease';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+    });
+  });
+  
+  // Profile picture click
+  const profilePic = document.querySelectorAll('.rounded-full.size-10')[1];
+  if (profilePic) {
+    profilePic.style.cursor = 'pointer';
+    profilePic.addEventListener('click', function() {
+      console.log('Profile picture clicked');
+    });
+  }
+  
+  // Real-time dashboard updates simulation
+  function updateDashboardStats() {
+    const activeRentals = document.querySelector('.text-3xl.font-bold');
+    if (activeRentals) {
+      console.log('Dashboard stats loaded');
+      // In real app, would fetch from API
+    }
+  }
+  
+  updateDashboardStats();
+  
+  // Auto-refresh notifications every 30 seconds (simulated)
+  setInterval(() => {
+    console.log('Checking for new notifications...');
+    // In real app, would check for updates
+  }, 30000);
+  
+  // Welcome message personalization
+  const welcomeMsg = document.querySelector('.text-3xl');
+  if (welcomeMsg) {
+    const userName = welcomeMsg.textContent.match(/Welcome back, (.+)!/);
+    if (userName) {
+      console.log('User:', userName[1]);
+    }
+  }
+  
+  // Quick actions shortcuts
+  document.addEventListener('keydown', function(e) {
+    // Alt+N: List new item
+    if (e.altKey && e.key === 'n') {
+      e.preventDefault();
+      window.location.href = 'add.html';
+    }
+    // Alt+H: Go home
+    if (e.altKey && e.key === 'h') {
+      e.preventDefault();
+      window.location.href = 'home.html';
+    }
+  });
+  
+  // Load dashboard data on page load
+  window.addEventListener('load', function() {
+    console.log('Dashboard loaded successfully');
+    // In real app, would fetch user data
+  });
+</script>
+
+</body></html>

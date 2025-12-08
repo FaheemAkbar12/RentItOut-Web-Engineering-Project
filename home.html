@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentItOut - Rent Anything, Go Anywhere</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#13b6ec",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<!-- Mobile overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden sidebar-overlay"></div>
+
+<div class="relative flex h-auto min-h-screen w-full group/design-root overflow-x-hidden">
+<!-- Animated Sidebar -->
+<aside id="sidebar" class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none">
+<!-- Logo Header -->
+<div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+</div>
+<button id="closeSidebar" class="md:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<a href="home.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="home">
+<span class="material-symbols-outlined text-xl">home</span>
+<span>Home</span>
+</a>
+<a href="itemlisting.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="itemlisting">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
+</a>
+<a href="add.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="add">
+<span class="material-symbols-outlined text-xl">add_box</span>
+<span>Rent In</span>
+</a>
+<a href="travel.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="travel">
+<span class="material-symbols-outlined text-xl">directions_car</span>
+<span>Travel Sharing</span>
+</a>
+<a href="userddash.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group" data-page="userddash">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
+</nav>
+
+<!-- User Profile / Auth Buttons -->
+<div class="mt-auto border-t border-gray-200 dark:border-gray-800 p-4 space-y-2">
+<button onclick="window.location.href='Login.html'" class="w-full flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-transform hover:scale-105">
+<span>Log In</span>
+</button>
+<button onclick="window.location.href='signup.html'" class="w-full flex items-center justify-center rounded-lg h-10 px-4 border-2 border-primary text-primary text-sm font-bold transition-colors hover:bg-primary/10">
+<span>Sign Up</span>
+</button>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="sticky top-0 z-30 flex items-center justify-between border-b border-gray-200 dark:border-gray-700 py-3 px-4 md:px-6 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm">
+<div class="flex items-center gap-4">
+<!-- Mobile menu toggle -->
+<button id="menuToggle" class="md:hidden flex items-center justify-center rounded-lg h-10 w-10 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-gray-700 dark:text-gray-300">menu</span>
+</button>
+
+<div class="md:hidden flex items-center gap-3 text-gray-900 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold">RentItOut</h2>
+</div>
+</div>
+
+<div class="flex items-center gap-2">
+<button class="hidden sm:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-gray-900 dark:text-white dark:hover:bg-white/10 hover:bg-black/5 text-sm font-bold leading-normal tracking-[0.015em] transition-colors">
+<span class="truncate">Log In</span>
+</button>
+<button class="hidden sm:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">Sign Up</span>
+</button>
+<button class="flex lg:hidden max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-transparent text-gray-900 dark:text-white dark:hover:bg-white/10 hover:bg-black/5 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<div class="flex h-full grow flex-col">
+<div class="w-full">
+<div class="layout-content-container flex flex-col mx-auto max-w-[1200px] px-4 md:px-10">
+<main class="flex flex-col gap-12 md:gap-16 lg:gap-20 py-12 md:py-16">
+<section class="w-full @container">
+<div class="@[480px]:p-4">
+<div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 rounded-xl items-center justify-center p-4 text-center" data-alt="People enjoying various rental items and scenic travel destinations" style='background-image: linear-gradient(rgba(16, 29, 34, 0.5) 0%, rgba(16, 29, 34, 0.7) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjQsaDYpFP7fqQHzvhuZgsWKH-VTOEO0XQYZtNUvl1w0xJH7Fs_Ue9nie0m46CKAXcxxFmOg_-R__Si-MEplVnJFiaCnvKxYCvAaKmj9oY61AmPF2ElgFuvK9wrPi25NFUaBiqKSlscRIrCUubdbJObkYIUPn8kdqr9ehfYKh-JaaBaJ0sjX5NLnUyYZ6xFmu7HmscDOdElxiaJZYkOAfrKTVHy43gMcBgb-ffShvBzwXKThfaUKa5r5HIq8D3Sr_ulJFDWqqsInU");'>
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+                      Rent Anything, Go Anywhere
+                    </h1>
+<h2 class="text-gray-200 text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal max-w-2xl mx-auto">
+                      Seamlessly rent items from your community and share rides to your next destination. Your one-stop platform for borrowing and traveling.
+                    </h2>
+</div>
+<label class="flex flex-col min-w-40 h-14 w-full max-w-[560px] @[480px]:h-16">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full shadow-lg">
+<div class="text-gray-500 flex bg-white items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-gray-900 focus:outline-0 focus:ring-0 border-0 bg-white h-full placeholder:text-gray-500 text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal" placeholder="Search for an item or a ride" value=""/>
+<div class="flex items-center justify-center rounded-r-lg bg-white pr-2">
+<button  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-gray-900 text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">Search</span>
+</button>
+</div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4">Trending Near You</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 p-4">
+<div class="flex flex-col gap-3 pb-3 bg-white dark:bg-gray-800/50 rounded-lg p-3 group transition-transform hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300" data-alt="A professional DSLR camera on a tripod." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBe_-VNjss7W55zxUbKWD5BHVQz9Sbqy0E3ckBg_qXjKPorGeEpe_VoIPj3JAAsOdXIyzqExA22eju_IZxQupX1rD7NN8xuaXK3-KoN-EYO1nAEyR7krqwynsoZ9as8N5kzstFu2UJBhsgY8pvGI8x0rz_q38FJElmlCm00fmToBhlJxpFUIzTtKtWeUa-s2RdNEalZ3WtKM2-RSx2Z7GGh4JXtzwfRBrW9MJR887BjL5I1cLi0iPLNmadhWuRDkkljRW3szT0BkhE");'></div>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Professional DSLR Camera</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">$40/day</p>
+<div class="flex items-center gap-1 text-sm text-amber-500">
+<span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<p class="text-gray-500 dark:text-gray-400 font-normal leading-normal">4.9</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 pb-3 bg-white dark:bg-gray-800/50 rounded-lg p-3 group transition-transform hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300" data-alt="A DJI Mavic Pro drone hovering in the air." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-GIwlDXMApZ5Nw5qqak7vEwV14qowcXcem3e0ofS3qz_UF-na09AdFquXDm2drf0iXX6_uXOr8nLiuav9oHLxuSc58ib8uDGXzzVzJNZUQSAqD2p0NgHeh9RbSeZZZWiCjj224E8BNxLla-hGlqO26i-nzd73YYWOzykATy5vQiJoRzFCeiG0XN_GHkreq-KddADGxUN-ttNLEkDcoDzMW4mDuXjgMawjaXrf6_Q4KyLcyItH7qgJD-C7kVa4urwoJHWbL51vCY8");'></div>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white text-base font-medium leading-normal">DJI Mavic Pro Drone</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">$55/day</p>
+<div class="flex items-center gap-1 text-sm text-amber-500">
+<span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<p class="text-gray-500 dark:text-gray-400 font-normal leading-normal">4.8</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 pb-3 bg-white dark:bg-gray-800/50 rounded-lg p-3 group transition-transform hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300" data-alt="A large camping tent set up in a forest." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASqIJVkWLiHlFmb-MdATCCciHpI8E9RBMQrinDMvDw-eZ6Rxi-jRDI0US9-zu941wO2paHoxz19QAw6P7ByffT6gtMiHbeFUYnO3LjbhTvEptaqK5GLUftDCZFLsr4JwR5TPD94-L-m65Yor_rDuvyS6nsSJ_WOJa2j_ZJJbSf7zKqpvquI1StcABItIOgnkvSc5RPtw1WxBb4Hlib98f5oQ9jzyLBGjoUVYzQ0NUOo-cvr3jwKAlJHfOzdOh2V4R31M9LLSRennQ");'></div>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white text-base font-medium leading-normal">4-Person Camping Tent</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">$25/day</p>
+<div class="flex items-center gap-1 text-sm text-amber-500">
+<span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<p class="text-gray-500 dark:text-gray-400 font-normal leading-normal">5.0</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 pb-3 bg-white dark:bg-gray-800/50 rounded-lg p-3 group transition-transform hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300" data-alt="A portable party speaker with colorful lights." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBuAG_wF1RQJm61GJhHjAe7OpIsAKR6vD8Ku6QpVwxU0tks3OJ5ZAf_mOC7YDN2uc-LMNE9yz3sUWez8rR3FQ54SL6prBYZ3niwTM2YhK6OKPA1ApvHJ6BWvMt_isVg595W_B0dtTiagdiF8YaMEcj_zj3u7T85ZebehKGALcxBQX4COv-qwMJOmIBvBF4st9TO6gfGhbV4d5ilkx6woYkegyASAxmCBJg0Lgk4tLVBl8VEiqEH1sj-zOmz_-TXp3xhb-ZlDIDQ0wE");'></div>
+</div>
+<div>
+<p class="text-gray-900 dark:text-white text-base font-medium leading-normal">Portable Party Speaker</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">$30/day</p>
+<div class="flex items-center gap-1 text-sm text-amber-500">
+<span class="material-symbols-outlined !text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<p class="text-gray-500 dark:text-gray-400 font-normal leading-normal">4.7</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-4">Popular Travel Routes</h2>
+<div class="flex flex-col gap-4 p-4">
+<div class="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-gray-800/50 p-4 rounded-lg hover:shadow-lg transition-shadow">
+<div class="flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Profile picture of David L." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJRJeyiA3JtfK7fZoneV7Z-EfNhqjRnxOMhcEvpPIWiGJei_ZOC-NXPtW7Vl82QbOpRQV9pYduC4rVCtFdS9BOXT2PQWtpFCDUe1flFVoTVdkLqqM8pJveXoCItgtZZ5QaDv0U5iNoD_MUTAPRgbrNd6LgDqw_B-Gpw5G12-gSGFF5rBbME3eywOk37KjndbmyCqjtcv94SH7xYCM_1bpSFeoRGmBeHbbBpG-PxxTr54obQl4jVmvhvwlNM2JZIEqXxMLmDK70I4g"/>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-2 text-gray-900 dark:text-white font-bold text-lg">
+<span>New York</span>
+<span class="material-symbols-outlined text-primary">arrow_forward</span>
+<span>Boston</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">October 25, 2024 - with David L.</p>
+</div>
+<div class="text-center sm:text-right">
+<p class="text-gray-900 dark:text-white font-bold text-lg">$35 / seat</p>
+</div>
+<div class="w-full sm:w-auto">
+<button class="flex w-full sm:w-auto min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">View Ride</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-gray-800/50 p-4 rounded-lg hover:shadow-lg transition-shadow">
+<div class="flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Profile picture of Sarah K." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD9g8_LyRdn8Ij5AMhr2F-0TTl6lv8298FPSEcCtPxkZ0dk3PfkRrLHqjFYKVW_AZHsGF1pw3WNR7dlpXoB2blWfiZEYhhFIZSGiGeBgo9H-6uwO1ShKvFzD8ATEzqqplk97QPxmbRhuJJtGjLHMJ0zidxdvjyqDgIzD7Wt_ZlXQCtCszY3CANb-Ob3FOP1UYH7wGKDfFQdXV7rylvWdB86H3u7aa_ej5p6Bwrka8efsCMDubmvC2OrCHm61L-bip652wX-UR8b00"/>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-2 text-gray-900 dark:text-white font-bold text-lg">
+<span>San Francisco</span>
+<span class="material-symbols-outlined text-primary">arrow_forward</span>
+<span>Los Angeles</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">November 5, 2024 - with Sarah K.</p>
+</div>
+<div class="text-center sm:text-right">
+<p class="text-gray-900 dark:text-white font-bold text-lg">$45 / seat</p>
+</div>
+<div class="w-full sm:w-auto">
+<button class="flex w-full sm:w-auto min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">View Ride</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-gray-800/50 p-4 rounded-lg hover:shadow-lg transition-shadow">
+<div class="flex-shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Profile picture of Mike T." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF3ReTJEDBWsjEB3nOMkhWqj9qTJ1QE06_y_gvk3R6hIoUgnOF5XB_l4vQT6cjLuzsNa5lbsEMIxbhKRNzO2417TxJhlnBa6hpdPGOO0yg_O4btpZy1iQro1KA0d2a2F50Vrd7fEEeAdPkpGv_8d7eLOdUKhO3aYbItkMTUfcJM77LgcVadtmqpl4CASFQqRP3H4Du8hSulg7bxkveztIDy5kTRa8KVEbOj6VcW7j0NnZ1nZPb5Ocj8zCAUzV9MxsihohJHNuSTPY"/>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="flex items-center justify-center sm:justify-start gap-2 text-gray-900 dark:text-white font-bold text-lg">
+<span>Karachi</span>
+<span class="material-symbols-outlined text-primary">arrow_forward</span>
+<span>Lahore</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm">December 10, 2025 - with Ahmed K.</p>
+</div>
+<div class="text-center sm:text-right">
+<p class="text-gray-900 dark:text-white font-bold text-lg">$35 / seat</p>
+</div>
+<div class="w-full sm:w-auto">
+<button class="flex w-full sm:w-auto min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold tracking-[0.015em] transition-transform hover:scale-105">
+<span class="truncate">View Ride</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full border-t border-gray-200 dark:border-gray-700 mt-10 py-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-4 text-gray-900 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold">RentItOut</h2>
+</div>
+<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+<a class="hover:text-primary dark:hover:text-primary transition-colors" href="#">FAQ</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors" href="#">Contact</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors" href="#">Privacy Policy</a>
+</div>
+<div class="text-sm text-gray-500 dark:text-gray-400">
+<p>© 2024 RentItOut. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- JavaScript -->
+<script src="js/utils.js"></script>
+<script src="js/sidebar.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+</body></html>
