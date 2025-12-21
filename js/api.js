@@ -1,53 +1,100 @@
-// API Configuration for RentItOut Frontend
-const API_CONFIG = {
-  BASE_URL: 'http://localhost:5000/api/v1',
-  TIMEOUT: 10000,
-  ENDPOINTS: {
-    // Items
-    ITEMS: '/items',
-    ITEM_BY_ID: (id) => `/items/${id}`,
-    USER_ITEMS: (userId) => `/items/user/${userId}`,
-    
-    // Travel
-    TRAVEL: '/travel',
-    TRAVEL_BY_ID: (id) => `/travel/${id}`,
-    BOOK_TRAVEL: (id) => `/travel/${id}/book`,
-    
-    // Bookings
-    BOOKINGS: '/bookings',
-    MY_BOOKINGS: '/bookings/my-bookings',
-    BOOKING_BY_ID: (id) => `/bookings/${id}`,
-    BOOKING_STATUS: (id) => `/bookings/${id}/status`,
-    CANCEL_BOOKING: (id) => `/bookings/${id}/cancel`,
-    
-    // Reviews
-    REVIEWS: '/reviews',
-    REVIEW_HELPFUL: (id) => `/reviews/${id}/helpful`,
-    REVIEW_RESPONSE: (id) => `/reviews/${id}/response`,
-    
-    // Users
-    USER_PROFILE: '/users/profile',
-    USER_STATS: '/users/stats',
-    USER_FAVORITES: '/users/favorites',
-    ADD_FAVORITE: (itemId) => `/users/favorites/items/${itemId}`,
-    REMOVE_FAVORITE: (itemId) => `/users/favorites/items/${itemId}`,
-    PUBLIC_PROFILE: (userId) => `/users/${userId}`
-  }
-};
+// Simplified API - Frontend Only (No Backend Required)
+// All data operations use localStorage
 
-// API Helper Class
 class API {
   constructor() {
-    this.baseUrl = API_CONFIG.BASE_URL;
-    this.timeout = API_CONFIG.TIMEOUT;
+    this.storage = {
+      items: 'rentitout_items',
+      travel: 'rentitout_travel',
+      bookings: 'rentitout_bookings',
+      reviews: 'rentitout_reviews',
+      users: 'rentitout_users'
+    };
   }
 
-  // Get Clerk session token
-  async getAuthToken() {
-    if (window.Clerk && window.Clerk.session) {
-      const token = await window.Clerk.session.getToken();
-      return token;
+  // Initialize sample data if not exists
+  initSampleData() {
+    if (!localStorage.getItem(this.storage.items)) {
+      localStorage.setItem(this.storage.items, JSON.stringify([]));
     }
+    if (!localStorage.getItem(this.storage.travel)) {
+      localStorage.setItem(this.storage.travel, JSON.stringify([]));
+    }
+  }
+
+  // Generic storage methods
+  getFromStorage(key) {
+    try {
+      return JSON.parse(localStorage.getItem(key)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  saveToStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  // Items API
+  items = {
+    getAll: async () => {
+      return this.getFromStorage(this.storage.items);
+    },
+    getById: async (id) => {
+      const items = this.getFromStorage(this.storage.items);
+      return items.find(item => item.id === id);
+    },
+    create: async (itemData) => {
+      const items = this.getFromStorage(this.storage.items);
+      const newItem = { ...itemData, id: Date.now().toString() };
+      items.push(newItem);
+      this.saveToStorage(this.storage.items, items);
+      return newItem;
+    }
+  };
+
+  // Travel API
+  travel = {
+    getAll: async () => {
+      return this.getFromStorage(this.storage.travel);
+    },
+    getById: async (id) => {
+      const travels = this.getFromStorage(this.storage.travel);
+      return travels.find(travel => travel.id === id);
+    },
+    create: async (travelData) => {
+      const travels = this.getFromStorage(this.storage.travel);
+      const newTravel = { ...travelData, id: Date.now().toString() };
+      travels.push(newTravel);
+      this.saveToStorage(this.storage.travel, travels);
+      return newTravel;
+    }
+  };
+
+  // Bookings API
+  bookings = {
+    getAll: async () => {
+      return this.getFromStorage(this.storage.bookings);
+    },
+    create: async (bookingData) => {
+      const bookings = this.getFromStorage(this.storage.bookings);
+      const newBooking = { ...bookingData, id: Date.now().toString() };
+      bookings.push(newBooking);
+      this.saveToStorage(this.storage.bookings, bookings);
+      return newBooking;
+    }
+  };
+}
+
+// Create global API instance
+const api = new API();
+api.initSampleData();
+
+// Export for use in other scripts
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = api;
+}
+
     return null;
   }
 

@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -31,6 +32,13 @@
     </style>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark">
+    <!-- Dark Mode Toggle -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+      <div class="theme-toggle-circle">
+        <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+      </div>
+    </button>
+
     <div class="min-h-screen flex">
         <!-- Sidebar -->
         <aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800">
@@ -52,7 +60,10 @@
                 <a href="add.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
                     <span class="material-symbols-outlined">add_box</span> Rent In
                 </a>
-                <a href="travel.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 bg-primary/10 text-primary font-bold">
+                <a href="addride.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 bg-primary/10 text-primary font-bold">
+                    <span class="material-symbols-outlined">add_road</span> Post Ride
+                </a>
+                <a href="travel.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
                     <span class="material-symbols-outlined">directions_car</span> Travel Sharing
                 </a>
                 <a href="userddash.html" class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium">
@@ -149,11 +160,11 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Price per Seat (USD) *
+                                    Price per Seat (PKR) *
                                 </label>
                                 <div class="relative">
-                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
-                                    <input type="number" id="price" min="1" step="1" placeholder="35" class="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">PKR</span>
+                                    <input type="number" id="price" min="1" step="1" placeholder="9800" class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"/>
                                 </div>
                             </div>
                             
@@ -295,7 +306,7 @@
             // Combine date and time
             const departureDateTime = new Date(`${departureDate}T${departureTime}`);
             
-            // Create ride object matching backend schema
+            // Create ride data object
             const rideData = {
                 route: {
                     origin: {
@@ -314,7 +325,7 @@
                 },
                 pricing: {
                     pricePerSeat: parseFloat(price),
-                    currency: 'USD'
+                    currency: 'PKR'
                 },
                 vehicle: {
                     make: document.getElementById('vehicleMake').value,
@@ -341,15 +352,7 @@
             submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Posting...';
             
             try {
-                // Try to post to backend
-                const response = await api.travel.create(rideData);
-                console.log('Ride created:', response);
-                alert('✅ Ride posted successfully!');
-                window.location.href = 'travel.html';
-            } catch (error) {
-                console.error('Error posting ride:', error);
-                
-                // Fallback: Store in localStorage for demo
+                // Store ride in localStorage
                 const localRides = JSON.parse(localStorage.getItem('localRides') || '[]');
                 localRides.push({
                     ...rideData,
@@ -358,8 +361,12 @@
                 });
                 localStorage.setItem('localRides', JSON.stringify(localRides));
                 
-                alert('✅ Ride posted successfully! (Stored locally - start backend server to save permanently)');
+                console.log('Ride posted:', rideData);
+                alert('✅ Ride posted successfully!');
                 window.location.href = 'travel.html';
+            } catch (error) {
+                console.error('Error posting ride:', error);
+                alert('❌ Failed to post ride. Please try again.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Post Ride';
@@ -374,5 +381,6 @@
             }, 5000);
         }
     </script>
+    <script src="js/theme.js"></script>
 </body>
 </html>

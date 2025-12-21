@@ -1,53 +1,84 @@
-// Authentication Helper using Clerk
+// Simplified Authentication - Frontend Only (No Backend Required)
+// Uses localStorage for session management
+
 class AuthService {
   constructor() {
-    this.clerk = null;
+    this.isReady = true;
     this.user = null;
-    this.isReady = false;
+    this.loadUser();
   }
 
-  // Initialize Clerk
-  async init() {
-    if (this.isReady) return;
-
-    try {
-      // Wait for Clerk to load
-      await this.waitForClerk();
-      this.clerk = window.Clerk;
-      
-      // Check if user is already signed in
-      if (this.clerk.user) {
-        this.user = this.clerk.user;
-        await this.syncUserWithBackend();
-      }
-
-      this.isReady = true;
-      console.log('Auth Service initialized');
-    } catch (error) {
-      console.error('Failed to initialize Auth Service:', error);
+  // Load user from localStorage
+  loadUser() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      this.user = {
+        email: localStorage.getItem('userEmail') || 'user@example.com',
+        id: localStorage.getItem('userId') || 'user_' + Date.now(),
+        name: localStorage.getItem('userName') || 'Guest User'
+      };
     }
   }
 
-  // Wait for Clerk to load
-  waitForClerk() {
-    return new Promise((resolve, reject) => {
-      if (window.Clerk) {
-        resolve(window.Clerk);
-        return;
-      }
+  // Check if user is authenticated
+  isAuthenticated() {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
 
-      let attempts = 0;
-      const maxAttempts = 50;
+  // Get current user
+  getUser() {
+    return this.user;
+  }
 
-      const interval = setInterval(() => {
-        attempts++;
-        if (window.Clerk) {
-          clearInterval(interval);
-          resolve(window.Clerk);
-        } else if (attempts >= maxAttempts) {
-          clearInterval(interval);
-          reject(new Error('Clerk failed to load'));
-        }
+  // Get user display name
+  getDisplayName() {
+    return this.user ? (this.user.name || this.user.email) : 'Guest';
+  }
+
+  // Get user email
+  getEmail() {
+    return this.user ? this.user.email : null;
+  }
+
+  // Sign in user (stores in localStorage)
+  signIn(email, password) {
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userId', 'user_' + Date.now());
+    localStorage.setItem('userName', email.split('@')[0]);
+    this.loadUser();
+    return true;
+  }
+
+  // Sign out user
+  signOut() {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
+    this.user = null;
+    window.location.href = 'Login.html';
+  }
+
+  // Get auth token (returns dummy token)
+  getToken() {
+    return this.isAuthenticated() ? 'dummy_token_' + Date.now() : null;
+  }
+}
+
+// Create global auth service instance
+const authService = new AuthService();
+
+// Dispatch ready event
+setTimeout(() => {
+  window.dispatchEvent(new CustomEvent('authReady'));
+}, 100);
+
+// Export for use in other scripts
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = authService;
+}
+
       }, 100);
     });
   }

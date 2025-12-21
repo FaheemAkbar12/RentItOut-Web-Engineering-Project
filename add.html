@@ -6,6 +6,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
 <script>
         tailwind.config = {
             darkMode: "class",
@@ -116,6 +117,10 @@
 <a href="add.html" class="nav-link active flex items-center gap-3 rounded-lg px-4 py-3 bg-primary/10 text-primary font-bold group">
 <span class="material-symbols-outlined text-xl">add_box</span>
 <span>Rent In</span>
+</a>
+<a href="addride.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
+<span class="material-symbols-outlined text-xl">add_road</span>
+<span>Post Ride</span>
 </a>
 <a href="travel.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
 <span class="material-symbols-outlined text-xl">directions_car</span>
@@ -251,12 +256,12 @@ FA
 <h2 class="text-xl font-bold text-gray-900 dark:text-white">Pricing & Terms</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <div>
-<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rental Price (USD) *</label>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rental Price (PKR) *</label>
 <div class="relative">
 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-<span class="text-gray-500 dark:text-gray-400 text-sm">$</span>
+<span class="text-gray-500 dark:text-gray-400 text-sm">PKR</span>
 </div>
-<input id="price" class="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" placeholder="0.00" type="text"/>
+<input id="price" class="w-full pl-16 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" placeholder="0" type="text"/>
 </div>
 </div>
 <div>
@@ -452,13 +457,58 @@ List Item
     return true;
   }
   
-  // Form submission - redirect to item listing
+  // Form submission - save to localStorage and redirect
   if (submitBtn) {
     submitBtn.addEventListener('click', async function(e) {
       e.preventDefault();
       
-      // Always redirect to item listing page
-      window.location.href = 'itemlisting.html';
+      // Validate form
+      const itemName = itemNameInput?.value.trim();
+      const itemDescription = itemDescInput?.value.trim();
+      const category = categorySelect?.value;
+      const condition = conditionSelect?.value;
+      const price = priceInput?.value.trim();
+      const priceUnit = durationSelect?.value;
+      const city = locationCity?.value;
+      const state = locationState?.value;
+      
+      if (!itemName || !itemDescription || !category || !price || !city) {
+        alert('Please fill in all required fields (marked with *)');
+        return;
+      }
+      
+      // Get existing items from localStorage or initialize empty array
+      const existingItems = JSON.parse(localStorage.getItem('rentitout_items') || '[]');
+      
+      // Create new item object
+      const newItem = {
+        id: Date.now().toString(),
+        name: itemName,
+        description: itemDescription,
+        category: category,
+        condition: condition,
+        price: parseFloat(price),
+        priceUnit: priceUnit,
+        city: city,
+        state: state,
+        status: isAvailable ? 'Available' : 'Rented',
+        rating: '0.0',
+        image: 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(itemName),
+        createdAt: new Date().toISOString(),
+        userId: localStorage.getItem('userId') || 'guest',
+        userName: localStorage.getItem('userName') || 'Guest User'
+      };
+      
+      // Add new item to the beginning of array
+      existingItems.unshift(newItem);
+      
+      // Save back to localStorage
+      localStorage.setItem('rentitout_items', JSON.stringify(existingItems));
+      
+      console.log('Item saved:', newItem);
+      
+      // Redirect to item listing page
+      window.location.href = 'itemlisting.html?new=true';
     });
   }
   
@@ -568,5 +618,6 @@ List Item
 <!-- API and Auth Integration Scripts -->
 <script src="js/api.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/theme.js"></script>
 
 </body></html>

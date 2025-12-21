@@ -8,6 +8,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
 <script>
         tailwind.config = {
             darkMode: "class",
@@ -38,38 +39,50 @@
     </style>
 </head>
 <body class="font-display">
+<!-- Dark Mode Toggle -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
 <div class="relative flex min-h-screen w-full bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
-<aside class="sticky top-0 h-screen w-64 flex-shrink-0 bg-white dark:bg-background-dark border-r border-gray-200 dark:border-gray-800 flex flex-col">
-<div class="flex items-center gap-4 px-6 h-16 border-b border-gray-200 dark:border-gray-800">
-<div class="size-6 text-primary">
+<aside class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
 <path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
 </svg>
 </div>
-<h2 class="text-gray-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">RentItOut</h2>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
 </div>
-<nav class="flex flex-col gap-2 p-4">
-<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 text-base font-medium" href="home.html">
-<span class="material-symbols-outlined">home</span>
-                    Home
-                </a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 text-base font-medium" href="itemlisting.html">
-<span class="material-symbols-outlined">shopping_bag</span>
-                    Rent Out
-                </a>
-                <a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors" href="add.html">
-<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="home.html">
+<span class="material-symbols-outlined text-xl">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="itemlisting.html">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="add.html">
+<span class="material-symbols-outlined text-xl">add_box</span>
 <span>Rent In</span>
 </a>
-
-<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-300 text-base font-bold" href="travel.html">
-<span class="material-symbols-outlined">directions_car</span>
-                    Travel Sharing
-                </a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-2.5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/50 text-base font-medium" href="userddash.html">
-<span class="material-symbols-outlined">dashboard</span>
-                    Dashboard
-                </a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="addride.html">
+<span class="material-symbols-outlined text-xl">add_road</span>
+<span>Post Ride</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 bg-primary/10 text-primary font-bold" href="travel.html">
+<span class="material-symbols-outlined text-xl">directions_car</span>
+<span>Travel Sharing</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="userddash.html">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
 </nav>
 <div class="mt-auto p-4 border-t border-gray-200 dark:border-gray-800">
 <div class="flex items-center gap-3">
@@ -158,7 +171,7 @@ Post a Ride
      data-origin="Karachi"
      data-destination="Lahore"
      data-departure="October 26, 2024 at 9:00 AM"
-     data-price="35"
+     data-price="9800"
      data-seats="2"
      data-bags="1"
      data-driver-name="Jane D."
@@ -172,7 +185,7 @@ Post a Ride
 <p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
 <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">October 26, 2024 at 9:00 AM</p>
 </div>
-<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">$35</div>
+<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR 1,800</div>
 </div>
 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
                                     Karachi <span class="text-primary mx-1">→</span> Lahore
@@ -206,7 +219,7 @@ Post a Ride
      data-origin="Islamabad"
      data-destination="Peshawar"
      data-departure="October 26, 2024 at 11:30 AM"
-     data-price="45"
+     data-price="12600"
      data-seats="3"
      data-bags="2"
      data-driver-name="Mark S."
@@ -220,7 +233,7 @@ Post a Ride
 <p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
 <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">October 26, 2024 at 11:30 AM</p>
 </div>
-<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">$45</div>
+<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR 2,300</div>
 </div>
 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
                                     Islamabad <span class="text-primary mx-1">→</span> Peshawar
@@ -268,7 +281,7 @@ Post a Ride
 <p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
 <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">October 27, 2024 at 8:00 AM</p>
 </div>
-<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">$35</div>
+<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR 1,500</div>
 </div>
 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
                                     Oakland <span class="text-primary mx-1">→</span> Sacramento
@@ -459,32 +472,23 @@ Post a Ride
   
   updateRideAvailability();
   
-  // Load rides from backend
+  // Load rides from localStorage
   async function loadRides() {
     const ridesContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
     if (!ridesContainer) return;
     
     try {
-      // Try to fetch from backend
-      const response = await api.travel.getAll({ limit: 20 });
-      const rides = response.data || response.travels || [];
-      
-      // Also get local rides from localStorage
+      // Get rides from localStorage
       const localRides = JSON.parse(localStorage.getItem('localRides') || '[]');
+      const storageRides = JSON.parse(localStorage.getItem('rentitout_travel') || '[]');
       
-      // Combine backend and local rides
-      const allRides = [...localRides, ...rides];
+      // Combine all rides
+      const allRides = [...localRides, ...storageRides];
       
       if (allRides.length > 0) {
-        // Clear existing static rides
-        const staticRides = ridesContainer.querySelectorAll('.ride-card');
-        if (staticRides.length <= 3) {
-          // Keep static rides as examples
-        }
-        
         // Add new rides
         allRides.forEach((ride, index) => {
-          const rideCard = createRideCard(ride, 'dynamic_' + index);
+          const rideCard = createRideCard(ride, 'stored_' + index);
           ridesContainer.appendChild(rideCard);
         });
         
@@ -495,15 +499,6 @@ Post a Ride
       console.log('Loaded rides:', allRides.length);
     } catch (error) {
       console.error('Error loading rides:', error);
-      // Try loading from localStorage only
-      const localRides = JSON.parse(localStorage.getItem('localRides') || '[]');
-      if (localRides.length > 0) {
-        localRides.forEach((ride, index) => {
-          const rideCard = createRideCard(ride, 'local_' + index);
-          ridesContainer.appendChild(rideCard);
-        });
-        attachRideClickHandlers();
-      }
     }
   }
   
@@ -548,7 +543,7 @@ Post a Ride
             <p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
             <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">${formattedDate} at ${formattedTime}</p>
           </div>
-          <div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">$${price}</div>
+          <div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR ${price}</div>
         </div>
         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
           ${origin} <span class="text-primary mx-1">→</span> ${destination}
@@ -644,5 +639,6 @@ Post a Ride
     }
   });
 </script>
+<script src="js/theme.js"></script>
 
 </body></html>

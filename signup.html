@@ -7,6 +7,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
 <script>
       tailwind.config = {
         darkMode: "class",
@@ -36,13 +37,20 @@
     </style>
 </head>
 <body class="font-display">
+<!-- Dark Mode Toggle Button -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
 <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark">
 <div class="layout-container flex h-full grow flex-col">
 <div class="flex flex-1 justify-center">
 <div class="layout-content-container flex flex-col w-full flex-1">
 <div class="grid min-h-screen w-full lg:grid-cols-2">
-<div class="relative hidden w-full bg-center bg-no-repeat bg-cover aspect-auto lg:flex" data-alt="A scenic view from a modern apartment balcony overlooking a city skyline at dusk, representing a desirable rental lifestyle." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKtGzmiLSpWxGHhKP6XjRtVPizrAe5ERXfJPJkrb6ZXZma0asU0lEJswOP9ymSVnTi0_Hxh_gUBNcv2HgWwJKNqe2pFHP2nChcc9RR3pZyunp-Y204-_5p_txOQA-mpWplC2gfc4CHriF4nGtXbMchf7DTOhGtiT62RqniJo1WAeU_tLl7UHXPpIrD6J56ZmN45neWlom0CfHksS2gthThi6x8euHIsXM45tF0KjzEIAIp2JfpiDF64AF3rsdkVKVU6biySoo4m8U");'>
-<div class="absolute inset-0 bg-black/30"></div>
+<div class="relative hidden w-full bg-center bg-no-repeat bg-cover aspect-auto lg:flex shine-effect" data-alt="A scenic view from a modern apartment balcony overlooking a city skyline at dusk, representing a desirable rental lifestyle." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKtGzmiLSpWxGHhKP6XjRtVPizrAe5ERXfJPJkrb6ZXZma0asU0lEJswOP9ymSVnTi0_Hxh_gUBNcv2HgWwJKNqe2pFHP2nChcc9RR3pZyunp-Y204-_5p_txOQA-mpWplC2gfc4CHriF4nGtXbMchf7DTOhGtiT62RqniJo1WAeU_tLl7UHXPpIrD6J56ZmN45neWlom0CfHksS2gthThi6x8euHIsXM45tF0KjzEIAIp2JfpiDF64AF3rsdkVKVU6biySoo4m8U");'>
+<div class="absolute inset-0 bg-gradient-to-br from-purple-900/90 to-primary/90"></div>
 <div class="relative z-10 flex h-full w-full items-end p-12">
 <div class="flex flex-col gap-4 text-white">
 <h2 class="text-4xl font-black leading-tight tracking-[-0.033em]">Discover endless possibilities.</h2>
@@ -50,8 +58,8 @@
 </div>
 </div>
 </div>
-<div class="flex w-full items-center justify-center bg-background-light dark:bg-background-dark p-6 sm:p-8 lg:p-12">
-<div class="flex w-full max-w-md flex-col gap-8">
+<div class="flex w-full items-center justify-center bg-gradient-to-br from-gray-50 to-white dark:from-background-dark dark:to-gray-900 p-6 sm:p-8 lg:p-12">
+<div class="flex w-full max-w-md flex-col gap-8 glass p-8 rounded-2xl shadow-2xl">
 <div class="flex flex-col items-start gap-1">
 <h1 class="text-primary text-2xl font-bold">RentItOut</h1>
 </div>
@@ -63,28 +71,32 @@
 <div class="flex flex-col gap-4">
 <label class="flex flex-col w-full flex-1">
 <p class="text-[#111618] dark:text-white text-base font-medium leading-normal pb-2">Full Name</p>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] text-base font-normal leading-normal" placeholder="Enter your full name" value=""/>
+<input id="fullNameInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] text-base font-normal leading-normal" placeholder="Enter your full name" value=""/>
+<p id="nameError" class="text-red-500 text-sm mt-1 hidden">Please enter your full name</p>
 </label>
 <label class="flex flex-col w-full flex-1">
 <p class="text-[#111618] dark:text-white text-base font-medium leading-normal pb-2">Email Address</p>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] text-base font-normal leading-normal" placeholder="Enter your email address" type="email" value=""/>
+<input id="emailInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] text-base font-normal leading-normal" placeholder="Enter your email address" type="email" value=""/>
+<p id="emailError" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email address</p>
 </label>
 <label class="flex flex-col w-full flex-1">
 <p class="text-[#111618] dark:text-white text-base font-medium leading-normal pb-2">Password</p>
 <div class="flex w-full flex-1 items-stretch rounded-lg">
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal" placeholder="Create a password" type="password" value=""/>
-<div class="text-[#617f89] dark:text-gray-400 flex border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark items-center justify-center px-4 rounded-r-lg border-l-0">
+<input id="passwordInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal" placeholder="Create a password" type="password" value=""/>
+<div class="text-[#617f89] dark:text-gray-400 flex border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark items-center justify-center px-4 rounded-r-lg border-l-0 cursor-pointer">
 <span class="material-symbols-outlined" style="font-size: 24px;">visibility_off</span>
 </div>
 </div>
+<p id="passwordError" class="text-red-500 text-sm mt-1 hidden">Password must be at least 8 characters</p>
 </label>
 <label class="flex flex-col w-full flex-1">
 <p class="text-[#111618] dark:text-white text-base font-medium leading-normal pb-2">Confirm Password</p>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] text-base font-normal leading-normal" placeholder="Confirm your password" type="password" value=""/>
+<input id="confirmPasswordInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111618] dark:text-white focus:outline-0 focus:ring-0 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark focus:border-primary h-14 placeholder:text-[#617f89] p-[15px] text-base font-normal leading-normal" placeholder="Confirm your password" type="password" value=""/>
+<p id="confirmPasswordError" class="text-red-500 text-sm mt-1 hidden">Passwords do not match</p>
 </label>
 </div>
 <div class="flex flex-col gap-4">
-<button class="flex items-center justify-center flex-1 rounded-lg bg-primary text-white text-base font-bold leading-normal px-6 h-14">Create Account</button>
+<button class="flex items-center justify-center flex-1 rounded-lg gradient-primary text-white text-base font-bold leading-normal px-6 h-14 hover:scale-105 hover:shadow-lg transition-all shine-effect">Create Account</button>
 <button class="flex items-center justify-center gap-3 flex-1 rounded-lg border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark text-[#111618] dark:text-white text-base font-bold leading-normal px-6 h-14">
 <svg height="24" viewbox="0 0 48 48" width="24" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
 <path d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" fill="#FFC107"></path><path d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" fill="#FF3D00"></path><path d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.222,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" fill="#4CAF50"></path><path d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.021,35.596,44,30.138,44,24C44,22.659,43.862,21.35,43.611,20.083z" fill="#1976D2"></path>
@@ -96,7 +108,7 @@
 <p class="text-[#617f89] dark:text-gray-400 text-sm font-normal leading-tight">By signing up, you agree to our <a class="font-medium text-primary hover:underline" href="#">Terms of Service</a>.</p>
 </div>
 <div class="flex items-center justify-center">
-<p class="text-[#111618] dark:text-white text-base font-normal leading-normal">Already have an account? <a class="font-bold text-primary hover:underline" href="#">Log in</a></p>
+<p class="text-[#111618] dark:text-white text-base font-normal leading-normal">Already have an account? <a class="font-bold text-primary hover:underline" href="Login.html">Log in</a></p>
 </div>
 </div>
 </div>
@@ -107,11 +119,24 @@
 </div>
 </div>
 <script>
-  // Password visibility toggle for both password fields
-  const passwordInput = document.querySelector('input[placeholder="Create a password"]');
-  const confirmPasswordInput = document.querySelector('input[placeholder="Confirm your password"]');
+  // Get form elements
+  const fullNameInput = document.getElementById('fullNameInput');
+  const emailInput = document.getElementById('emailInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const confirmPasswordInput = document.getElementById('confirmPasswordInput');
   const visibilityIcon = document.querySelector('.material-symbols-outlined');
   
+  // Get error elements
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+  const confirmPasswordError = document.getElementById('confirmPasswordError');
+  
+  // Get buttons
+  const createAccountBtn = document.querySelector('.gradient-primary');
+  const googleSignUpBtn = document.querySelectorAll('button')[1];
+  
+  // Password visibility toggle
   if (visibilityIcon && passwordInput) {
     visibilityIcon.parentElement.addEventListener('click', function() {
       if (passwordInput.type === 'password') {
@@ -123,12 +148,6 @@
       }
     });
   }
-  
-  // Form inputs
-  const fullNameInput = document.querySelector('input[placeholder="Enter your full name"]');
-  const emailInput = document.querySelector('input[placeholder="Enter your email address"]');
-  const createAccountBtn = document.querySelector('button:not([class*="google"])');
-  const googleSignUpBtn = document.querySelectorAll('button')[1];
   
   // Email validation
   function isValidEmail(email) {
@@ -147,59 +166,146 @@
     return strength;
   }
   
+  // Clear error on input
+  fullNameInput.addEventListener('input', () => {
+    nameError.classList.add('hidden');
+    fullNameInput.classList.remove('border-red-500');
+  });
+  
+  emailInput.addEventListener('input', () => {
+    emailError.classList.add('hidden');
+    emailInput.classList.remove('border-red-500');
+  });
+  
+  passwordInput.addEventListener('input', () => {
+    passwordError.classList.add('hidden');
+    passwordInput.classList.remove('border-red-500');
+  });
+  
+  confirmPasswordInput.addEventListener('input', () => {
+    confirmPasswordError.classList.add('hidden');
+    confirmPasswordInput.classList.remove('border-red-500');
+  });
+  
   // Form validation and submission
   createAccountBtn.addEventListener('click', function(e) {
     e.preventDefault();
+    
+    // Reset all errors
+    nameError.classList.add('hidden');
+    emailError.classList.add('hidden');
+    passwordError.classList.add('hidden');
+    confirmPasswordError.classList.add('hidden');
+    fullNameInput.classList.remove('border-red-500');
+    emailInput.classList.remove('border-red-500');
+    passwordInput.classList.remove('border-red-500');
+    confirmPasswordInput.classList.remove('border-red-500');
     
     const fullName = fullNameInput.value.trim();
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
     const confirmPassword = confirmPasswordInput.value.trim();
     
-    // Validation
+    let hasError = false;
+    
+    // Validate full name
     if (!fullName) {
-      fullNameInput.focus();
-      return;
+      nameError.classList.remove('hidden');
+      fullNameInput.classList.add('border-red-500');
+      if (!hasError) fullNameInput.focus();
+      hasError = true;
     }
     
+    // Validate email
     if (!email) {
-      emailInput.focus();
-      return;
+      emailError.textContent = 'Please enter your email address';
+      emailError.classList.remove('hidden');
+      emailInput.classList.add('border-red-500');
+      if (!hasError) emailInput.focus();
+      hasError = true;
+    } else if (!isValidEmail(email)) {
+      emailError.textContent = 'Please enter a valid email address';
+      emailError.classList.remove('hidden');
+      emailInput.classList.add('border-red-500');
+      if (!hasError) emailInput.focus();
+      hasError = true;
     }
     
-    if (!isValidEmail(email)) {
-      emailInput.focus();
-      return;
-    }
-    
+    // Validate password
     if (!password) {
-      passwordInput.focus();
-      return;
+      passwordError.textContent = 'Please create a password';
+      passwordError.classList.remove('hidden');
+      passwordInput.classList.add('border-red-500');
+      if (!hasError) passwordInput.focus();
+      hasError = true;
+    } else if (password.length < 8) {
+      passwordError.textContent = 'Password must be at least 8 characters';
+      passwordError.classList.remove('hidden');
+      passwordInput.classList.add('border-red-500');
+      if (!hasError) passwordInput.focus();
+      hasError = true;
+    } else {
+      const passwordStrength = checkPasswordStrength(password);
+      if (passwordStrength < 3) {
+        passwordError.textContent = 'Password is too weak. Use uppercase, lowercase, numbers, and symbols';
+        passwordError.classList.remove('hidden');
+        passwordInput.classList.add('border-red-500');
+        if (!hasError) passwordInput.focus();
+        hasError = true;
+      }
     }
     
-    if (password.length < 8) {
-      passwordInput.focus();
-      return;
-    }
-    
-    const passwordStrength = checkPasswordStrength(password);
-    if (passwordStrength < 3) {
-      passwordInput.focus();
-      return;
-    }
-    
+    // Validate confirm password
     if (!confirmPassword) {
-      confirmPasswordInput.focus();
+      confirmPasswordError.textContent = 'Please confirm your password';
+      confirmPasswordError.classList.remove('hidden');
+      confirmPasswordInput.classList.add('border-red-500');
+      if (!hasError) confirmPasswordInput.focus();
+      hasError = true;
+    } else if (password !== confirmPassword) {
+      confirmPasswordError.textContent = 'Passwords do not match';
+      confirmPasswordError.classList.remove('hidden');
+      confirmPasswordInput.classList.add('border-red-500');
+      if (!hasError) confirmPasswordInput.focus();
+      hasError = true;
+    }
+    
+    // Stop if any errors
+    if (hasError) {
       return;
     }
     
-    if (password !== confirmPassword) {
-      confirmPasswordInput.focus();
+    // Store user data in localStorage
+    const users = JSON.parse(localStorage.getItem('rentitout_users') || '[]');
+    
+    // Check if email already exists
+    if (users.some(u => u.email === email)) {
+      emailError.textContent = 'Email already registered';
+      emailError.classList.remove('hidden');
+      emailInput.classList.add('border-red-500');
+      emailInput.focus();
       return;
     }
     
-    // Success
-    console.log('Account created:', { fullName, email });
+    // Create new user
+    const newUser = {
+      id: Date.now().toString(),
+      fullName,
+      email,
+      password,
+      createdAt: new Date().toISOString()
+    };
+    
+    users.push(newUser);
+    localStorage.setItem('rentitout_users', JSON.stringify(users));
+    
+    // Auto login
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', email);
+    localStorage.setItem('userId', newUser.id);
+    localStorage.setItem('userName', fullName);
+    
+    // Success - redirect to home
     window.location.href = 'home.html';
   });
   
@@ -224,4 +330,5 @@
     });
   }
 </script>
+<script src="js/theme.js"></script>
 </body></html>

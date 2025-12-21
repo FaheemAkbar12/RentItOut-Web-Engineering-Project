@@ -7,6 +7,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script>
         tailwind.config = {
@@ -47,69 +48,79 @@
     </style>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-dark-charcoal dark:text-dark-charcoal-dark">
+<!-- Dark Mode Toggle -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
 <div class="relative flex h-auto min-h-screen w-full group/design-root overflow-x-hidden">
-<aside class="sticky top-0 z-50 h-screen bg-white dark:bg-background-dark border-r border-light-gray-border dark:border-light-gray-border-dark w-64 flex-col justify-between hidden lg:flex">
-<div class="flex flex-col">
-<div class="flex items-center gap-2 text-dark-charcoal dark:text-dark-charcoal-dark h-16 border-b border-light-gray-border dark:border-light-gray-border-dark px-6">
-<span class="material-symbols-outlined text-primary text-3xl">real_estate_agent</span>
-<h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">RentItOut</h2>
+<aside class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none hidden lg:flex">
+<div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
 </div>
-<nav class="flex flex-col gap-2 p-4">
-<a class="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-dark-charcoal dark:text-dark-charcoal-dark hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors" href="home.html"><span class="material-symbols-outlined">home</span>Home</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium bg-primary/10 text-primary dark:text-primary transition-colors" href="itemdetail.html"><span class="material-symbols-outlined">shopping_bag</span>Rent Out</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors" href="add.html">
-<span class="material-symbols-outlined">shopping_bag</span>
-<span>Rent In</span>
-</a>
-
-<a class="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-dark-charcoal dark:text-dark-charcoal-dark hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">flight_takeoff</span>Travel Sharing</a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium text-dark-charcoal dark:text-dark-charcoal-dark hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors" href="userddash.html"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
-
-</nav>
-<!-- <nav class="flex flex-col gap-4">
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium text-primary dark:text-primary bg-primary/10 transition-colors" href="home.html">
-<span class="material-symbols-outlined">home</span>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="home.html">
+<span class="material-symbols-outlined text-xl">home</span>
 <span>Home</span>
 </a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors" href="itemlisting.html">
-<span class="material-symbols-outlined">shopping_bag</span>
-<span>Rentals</span>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 bg-primary/10 text-primary font-bold" href="itemlisting.html">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
 </a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors" href="travel.html">
-<span class="material-symbols-outlined">explore</span>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="add.html">
+<span class="material-symbols-outlined text-xl">add_box</span>
+<span>Rent In</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="addride.html">
+<span class="material-symbols-outlined text-xl">add_road</span>
+<span>Post Ride</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="travel.html">
+<span class="material-symbols-outlined text-xl">directions_car</span>
 <span>Travel Sharing</span>
 </a>
-<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors" href="userddash.html">
-<span class="material-symbols-outlined">dashboard</span>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="userddash.html">
+<span class="material-symbols-outlined text-xl">dashboard</span>
 <span>Dashboard</span>
 </a>
-</nav> -->
-</div>
-<div class="p-4 border-t border-light-gray-border dark:border-light-gray-border-dark">
+</nav>
+</nav>
+<div class="mt-auto border-t border-gray-200 dark:border-gray-800 p-4">
 <div class="flex items-center gap-3">
 <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User's profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0pHpc7feD3MneUTt96qkuuQZstE-V_DVLHZrLvbrXKsx9b6tloEOBQt3NxJ6A4YkhTd8XkAuiREfhzE7guMnw1Q-XvYHp2-lMQdvP-5vNHh2ppbg3EwBYcaBljUTOaTIzAgmjW26rTUdwzjuUUmA8fRYSheejysvULnTBFK2au2uA03dB0JRgwyIAo4cUIyh11CTCdN2O3gmYD86w8U1ImHrFXBD_XCAgCitnKcXnu_9FtepcPyArvHfv9yZdWrA1DfNpmm_nGDI");'></div>
-<div class="flex-1">
-<p class="text-sm font-bold">Jane Doe</p>
-<p class="text-xs text-gray-500 dark:text-gray-400">jane.doe@example.com</p>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Faheem Akbar</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">fammyalpha@gmail.com</p>
 </div>
-<button class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"><span class="material-symbols-outlined">logout</span></button>
+<button class="ml-auto flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-gray-800 dark:text-gray-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400">notifications</span>
+</button>
 </div>
 </div>
 </aside>
 <div class="flex-1 flex flex-col">
-<header class="sticky top-0 z-40 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-light-gray-border dark:border-light-gray-border-dark w-full">
-<div class="container mx-auto px-4">
-<div class="flex items-center justify-between whitespace-nowrap h-16">
+<header class="sticky top-0 z-40 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-light-gray-border dark:border-light-gray-border-dark shadow-sm">
+<div class="container mx-auto px-4 lg:px-6">
+<div class="flex items-center justify-between h-16 gap-4">
 <div class="flex items-center gap-4">
 <button class="lg:hidden p-2 -ml-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">
 <span class="material-symbols-outlined">menu</span>
 </button>
-<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
-<div class="text-gray-500 dark:text-gray-400 flex bg-gray-100 dark:bg-gray-700 items-center justify-center pl-3 rounded-l-lg border-r-0">
+<label class="hidden md:flex flex-col min-w-64 !h-10 max-w-96">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full shadow-sm">
+<div class="text-gray-500 dark:text-gray-400 flex bg-gray-100 dark:bg-gray-800 items-center justify-center pl-4 rounded-l-xl border-r-0">
 <span class="material-symbols-outlined">search</span>
 </div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-dark-charcoal dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-100 dark:bg-gray-700 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 pl-2 text-sm font-normal leading-normal" placeholder="Search for items..." value=""/>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-xl text-dark-charcoal dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/30 border-none bg-gray-100 dark:bg-gray-800 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-3 text-sm font-normal leading-normal transition-all" placeholder="Search for items..." value=""/>
 </div>
 </label>
 </div>
@@ -127,12 +138,12 @@
 </div>
 </div>
 </header>
-<main class="container mx-auto px-4 py-8">
-<div class="layout-content-container flex flex-col w-full">
+<main class="container mx-auto px-4 lg:px-6 py-6 lg:py-8">
+<div class="layout-content-container flex flex-col w-full max-w-7xl mx-auto">
 <div class="flex items-center gap-3 pb-4">
-<button onclick="window.location.href='itemlisting.html'" class="flex items-center gap-2 px-4 py-2 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-<span class="material-symbols-outlined">arrow_back</span>
-<span class="text-sm font-medium">Back to Listings</span>
+<button onclick="window.location.href='itemlisting.html'" class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-all shadow-sm hover:shadow">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+<span class="text-sm font-semibold">Back to Listings</span>
 </button>
 </div>
 <div class="flex flex-wrap gap-2 pb-4">
@@ -142,20 +153,20 @@
 <span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
 <span class="text-dark-charcoal dark:text-dark-charcoal-dark text-sm font-medium leading-normal">Camera</span>
 </div>
-<div class="flex flex-wrap justify-between gap-4 items-start pb-6">
-<div class="flex flex-col gap-2">
-<h1 class="text-dark-charcoal dark:text-dark-charcoal-dark text-4xl font-black leading-tight tracking-[-0.033em]">Canon EOS R5 Mirrorless Camera</h1>
-<p class="text-gray-600 dark:text-gray-400 text-base font-normal leading-normal">Professional grade, includes 24-70mm lens</p>
+<div class="flex flex-wrap justify-between gap-4 items-start pb-8">
+<div class="flex flex-col gap-3">
+<h1 class="text-dark-charcoal dark:text-dark-charcoal-dark text-3xl md:text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em]">Canon EOS R5 Mirrorless Camera</h1>
+<p class="text-gray-600 dark:text-gray-400 text-base md:text-lg font-medium leading-relaxed">Professional grade, includes 24-70mm lens</p>
 </div>
-<button class="flex items-center gap-2 p-2 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark bg-light-gray-bg dark:bg-light-gray-bg-dark hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-<span class="material-symbols-outlined text-red-500">favorite</span>
-<span class="text-sm font-medium">Save</span>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-300 dark:hover:border-red-800 transition-all shadow-sm hover:shadow group">
+<span class="material-symbols-outlined text-red-500 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 0;">favorite</span>
+<span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Save</span>
 </button>
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
 <div class="lg:col-span-2 flex flex-col gap-4">
-<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-xl min-h-[480px] shadow-sm" data-alt="Main view of the Canon EOS R5 camera body with a lens attached, sitting on a clean surface" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYZGxs0TUQmf1iWv825iQHELI78oReKZeM5oL7Sfuy8ss_DNFqaNRJNYOlShoiVpLcChjojIho39vtj5nhGCzRYyTc_nAze__D6kdVMvcyJaQ3s5NdyQpXlnL6oY-GVPPMNSv__zt9jujDRn7CDeU7eByBifsOgNCrupVUQ_0H6TGosNi5fT3fZz6txsrG8hUThmDLCqImkrM02ES2JFqXzTrviZfxNTqpWiEo0iWZZYO9pafmWOSJ2C5Zzw3a2ODd-ymUsi3z8bo");'></div>
-<div class="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-4">
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-2xl min-h-[400px] md:min-h-[480px] lg:min-h-[520px] shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700" data-alt="Main view of the Canon EOS R5 camera body with a lens attached, sitting on a clean surface" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYZGxs0TUQmf1iWv825iQHELI78oReKZeM5oL7Sfuy8ss_DNFqaNRJNYOlShoiVpLcChjojIho39vtj5nhGCzRYyTc_nAze__D6kdVMvcyJaQ3s5NdyQpXlnL6oY-GVPPMNSv__zt9jujDRn7CDeU7eByBifsOgNCrupVUQ_0H6TGosNi5fT3fZz6txsrG8hUThmDLCqImkrM02ES2JFqXzTrviZfxNTqpWiEo0iWZZYO9pafmWOSJ2C5Zzw3a2ODd-ymUsi3z8bo");'></div>
+<div class="grid grid-cols-4 sm:grid-cols-5 gap-3">
 <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer border-2 border-primary" data-alt="Side view of the Canon camera showing its ports" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1VT4l5zSHDJ7T0BkD25f83ajv_desyEHiHY3fq7hxp_r8RkoP-dLpYmF0gfHyUI0zBe7zD9pyHP2ZqRZlfEMd3bRvXeV9F1vm6HQK8FCC2-QgDpkulwtb2Ig1Ui9ESTz4M030cqEB6MASj2s7Cdu87fudioqMMlNuG4d7ykxdM84CYWZj3XQKloGR3bdvAePYuhVYYH_frsnrhYVsatfpeDWf4Ue4jl9BklZ_lbe28nkVavD7cw64m4buUBdyhZvfoa96cbqpw00");'></div>
 <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="Close-up of the camera lens" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJBnIXQpinFkBIejOYh67f1edgOboovT_safMAAsTosbrtZjcNy4B7QPCLDbUjKYDrYK9U8kDttC1F5srJugqVh-ThBE5SJ_lonWXp9njPlW_84U2OjQpBaLaQyIKA_iAfhwp5mzdIVEGn02DQjzhK0RVyxI-Q4FowP1v_oKnfqJgjRxDxuickKJqckkXpGX2grWlNZryegrK1RFeEVnw1YykMDFopy9qI4aegzzZywMx3b2RlpCc907xM-gHGDOPrQKFzIvoJ8W4");'></div>
 <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="Back of the camera showing the LCD screen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABI2yKh7B84N5ETI_JrIFpycw0kh0vDTLxWTBLz0U3Ty1SGKC61gGtEybkghucpGMd45EHAvM3HvCryOHx5xGzmLZzaQeH1ZNLnT8XtPAUeI2eegtEPHkmhT3zw0Vd2WpbVvZAy0z5SOu45r2Qu5rAjhcjeM5xL1o1KVzUbSiln-bQJ_9JB_R9UGKFa2ZJ0tnWO7-6jKsQMqXEO3u0PPT-XDfoDuqnCKfi14CaR-Cah9bgI_osbihdZZBeZH4w52QhrsfwtyjTrUU");'></div>
@@ -164,21 +175,23 @@
 </div>
 </div>
 <div class="lg:col-span-1 flex flex-col gap-6">
-<div class="p-6 rounded-xl border border-light-gray-border dark:border-light-gray-border-dark bg-light-gray-bg dark:bg-light-gray-bg-dark shadow-sm">
-<div class="mb-4">
-<p class="text-sm text-gray-600 dark:text-gray-400">Price per day</p>
-<p class="text-3xl font-bold text-dark-charcoal dark:text-dark-charcoal-dark">$50.00</p>
+<div class="p-6 lg:p-8 rounded-2xl border-2 border-light-gray-border dark:border-light-gray-border-dark bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 shadow-xl sticky top-24">
+<div class="mb-6">
+<p class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Price per day</p>
+<p class="text-4xl font-black text-dark-charcoal dark:text-dark-charcoal-dark mt-1">PKR 2,500</p>
 </div>
-<div class="flex flex-col gap-4">
-<button id="rentNowBtn" class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+<div class="flex flex-col gap-3">
+<button id="rentNowBtn" class="w-full flex items-center justify-center gap-2 rounded-xl h-14 px-6 bg-gradient-to-r from-primary to-blue-500 text-white text-base font-bold leading-normal tracking-wide hover:shadow-lg hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
 <span class="truncate">Rent Now</span>
 </button>
-<button id="chatOwnerBtn" class="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-gray-200 dark:bg-gray-700 text-dark-charcoal dark:text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+<button id="chatOwnerBtn" class="w-full flex items-center justify-center gap-2 rounded-xl h-14 px-6 border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-dark-charcoal dark:text-white text-base font-bold leading-normal hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500 transition-all">
+<span class="material-symbols-outlined">chat</span>
 <span class="truncate">Chat with Owner</span>
 </button>
 </div>
 </div>
-<div class="flex items-center gap-4 p-4 rounded-xl border border-light-gray-border dark:border-light-gray-border-dark bg-light-gray-bg dark:bg-light-gray-bg-dark">
+<div class="flex items-center gap-4 p-5 rounded-2xl border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow">
 <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-14" data-alt="Profile picture of the item owner, Alex Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcm8NAmKPVv_WpDsC2TsN75C7NIvzszWwqF9GlODBXFLrFcCNRbr-bo8GJsPUcZn4TIJECxV-_lSGrErKSmx3ivpvanqs05gGVRB8NVXDEn9x5DTjP5_JdLOZ9y4vPDamAcmg4oGmyPZWbN9hbKlpKJ-1DvqBI11qKi56G38JfH1VHUZChz4hKl5U7IGGwWtpIgIKZ4ORzJmGGDbe8sTs8UC6zk8DZRy_a6VkjCu9MpSK7W_9HRpULrOroY0f3-UirEAIi0nwi79w");'></div>
 <div class="flex-1">
 <p class="font-bold text-dark-charcoal dark:text-dark-charcoal-dark">Alex Doe</p>
@@ -196,16 +209,16 @@
 </div>
 </div>
 </div>
-<div class="mt-10">
-<div class="border-b border-light-gray-border dark:border-light-gray-border-dark">
-<nav class="flex gap-6 -mb-px">
-<button class="py-4 px-1 border-b-2 border-primary text-primary font-semibold text-sm">Description</button>
-<button class="py-4 px-1 border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 font-medium text-sm transition-colors">Specifications</button>
-<button class="py-4 px-1 border-b-2 border-transparent text-gray-500 hover:border-g ray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 font-medium text-sm transition-colors">Owner Reviews</button>
+<div class="mt-12">
+<div class="border-b-2 border-light-gray-border dark:border-light-gray-border-dark">
+<nav class="flex gap-8 -mb-0.5 overflow-x-auto">
+<button class="py-4 px-2 border-b-3 border-primary text-primary font-bold text-base whitespace-nowrap">Description</button>
+<button class="py-4 px-2 border-b-3 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 font-semibold text-base transition-all whitespace-nowrap">Specifications</button>
+<button class="py-4 px-2 border-b-3 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 font-semibold text-base transition-all whitespace-nowrap">Owner Reviews</button>
 </nav>
 </div>
-<div class="py-6">
-<div class="prose prose-sm max-w-none text-gray-600 dark:text-gray-300">
+<div class="py-8">
+<div class="prose prose-base lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
 <p>Capture your world in stunning detail with the Canon EOS R5. This professional-grade full-frame mirrorless camera is perfect for both photographers and videographers who demand the best. It boasts a 45-megapixel CMOS sensor, shoots 8K video, and features an advanced Dual Pixel CMOS AF II system for tack-sharp focus.</p>
 <p>This rental includes the versatile RF 24-70mm f/2.8L IS USM lens, two batteries, a charger, and a 128GB high-speed memory card, all packed in a durable carrying case. The camera is in excellent condition with minimal signs of use.</p>
 <h3 class="text-dark-charcoal dark:text-dark-charcoal-dark font-bold mt-4">Rental Rules</h3>
@@ -255,7 +268,7 @@
 <div class="flex-1">
 <h4 class="font-bold text-dark-charcoal dark:text-dark-charcoal-dark mb-1" id="rentModalTitle">Item Name</h4>
 <p class="text-sm text-gray-600 dark:text-gray-400" id="rentModalCategory">Category</p>
-<p class="text-lg font-bold text-primary mt-2" id="rentModalPrice">$0.00/day</p>
+<p class="text-lg font-bold text-primary mt-2" id="rentModalPrice">PKR 0/day</p>
 </div>
 </div>
 <div class="space-y-4 mb-6">
@@ -274,7 +287,7 @@
 </div>
 <div class="flex justify-between items-center text-lg font-bold">
 <span class="text-dark-charcoal dark:text-dark-charcoal-dark">Total:</span>
-<span class="text-primary" id="rentalTotal">$0.00</span>
+<span class="text-primary" id="rentalTotal">PKR 0</span>
 </div>
 </div>
 </div>
@@ -718,7 +731,7 @@ Send
     // Update price
     const priceElement = document.querySelector('.text-3xl.font-bold');
     if (priceElement && itemData.price) {
-      priceElement.textContent = `$${parseFloat(itemData.price).toFixed(2)}`;
+      priceElement.textContent = `PKR ${Math.round(parseFloat(itemData.price))}`;
     }
     
     // Update description
@@ -762,5 +775,6 @@ Send
     });
   }
 </script>
+<script src="js/theme.js"></script>
 
 </body></html>

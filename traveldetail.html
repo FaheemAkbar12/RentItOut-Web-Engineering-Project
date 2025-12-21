@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -33,6 +34,13 @@
     </style>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark">
+    <!-- Dark Mode Toggle -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+      <div class="theme-toggle-circle">
+        <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+      </div>
+    </button>
+
     <div class="min-h-screen">
         <!-- Header -->
         <header class="sticky top-0 z-40 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800">
@@ -206,7 +214,7 @@
                     <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-sm text-gray-600 dark:text-gray-400">Price per seat:</span>
-                            <span class="font-medium text-gray-900 dark:text-white" id="pricePerSeat">$35</span>
+                            <span class="font-medium text-gray-900 dark:text-white" id="pricePerSeat">PKR 9,800</span>
                         </div>
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-sm text-gray-600 dark:text-gray-400">Seats:</span>
@@ -298,9 +306,9 @@
             document.getElementById('bookModalDeparture').textContent = rideData.departure;
         }
         if (rideData.price) {
-            document.getElementById('ridePrice').textContent = `$${rideData.price}`;
-            document.getElementById('pricePerSeat').textContent = `$${rideData.price}`;
-            document.getElementById('bookingTotal').textContent = `$${rideData.price}`;
+            document.getElementById('ridePrice').textContent = `PKR ${rideData.price}`;
+            document.getElementById('pricePerSeat').textContent = `PKR ${rideData.price}`;
+            document.getElementById('bookingTotal').textContent = `PKR ${rideData.price}`;
         }
         if (rideData.seats) {
             document.getElementById('availableSeats').textContent = `${rideData.seats} seats`;
@@ -462,5 +470,6 @@
             if (e.key === 'Enter') sendMessage();
         });
     </script>
+    <script src="js/theme.js"></script>
 </body>
 </html>

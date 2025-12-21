@@ -8,15 +8,8 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Clerk Authentication Library -->
-<script
-  async
-  crossorigin="anonymous"
-  data-clerk-publishable-key="YOUR_CLERK_PUBLISHABLE_KEY"
-  src="https://[your-clerk-frontend-api].clerk.accounts.dev/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
-  type="text/javascript"
-></script>
 <script>
     tailwind.config = {
       darkMode: "class",
@@ -47,14 +40,21 @@
   </style>
 </head>
 <body class="font-display">
+<!-- Dark Mode Toggle Button -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
 <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
 <div class="layout-container flex h-full grow flex-col">
 <div class="flex flex-1 justify-center">
 <div class="layout-content-container flex flex-col w-full flex-1">
 <div class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
 <!-- Left Column: Image & Branding -->
-<div class="relative hidden lg:flex flex-col justify-between p-12 bg-center bg-no-repeat bg-cover" style='background-image: url("https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=2070&auto=format&fit=crop");'>
-<div class="absolute inset-0 bg-black/40"></div>
+<div class="relative hidden lg:flex flex-col justify-between p-12 bg-center bg-no-repeat bg-cover shine-effect" style='background-image: url("https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=2071&auto=format&fit=crop");'>
+<div class="absolute inset-0 bg-gradient-to-br from-primary/90 to-purple-900/90"></div>
 <div class="relative z-10 flex items-center gap-3">
 <span class="material-symbols-outlined text-white text-4xl">
                   travel_explore
@@ -67,8 +67,8 @@
 </div>
 </div>
 <!-- Right Column: Login Form -->
-<div class="flex flex-col items-center justify-center w-full bg-white dark:bg-background-dark py-12 px-4 sm:px-6 lg:px-8">
-<div class="w-full max-w-md space-y-8">
+<div class="flex flex-col items-center justify-center w-full bg-gradient-to-br from-gray-50 to-white dark:from-background-dark dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-md space-y-8 glass p-8 rounded-2xl shadow-2xl">
 <!-- Header -->
 <div class="flex flex-col gap-3">
 <p class="text-[#111618] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Welcome Back</p>
@@ -99,13 +99,24 @@
 <p id="passwordError" class="text-red-500 text-sm mt-1 hidden">Please enter your password</p>
 </div>
 <!-- Login Button -->
-<button class="flex items-center justify-center text-center font-bold text-base h-14 w-full rounded-xl bg-primary text-white hover:bg-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark mt-4">
+<button id="loginButton" class="flex items-center justify-center text-center font-bold text-base h-14 w-full rounded-xl gradient-primary text-white hover:shadow-2xl hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark mt-4 shine-effect">
                     Log In
                   </button>
 <!-- Sign Up Link -->
 <p class="text-center text-[#617f89] dark:text-gray-400 text-base font-normal leading-normal">
                     Don't have an account? <a class="font-bold text-primary hover:underline" href="signup.html">Sign Up</a>
 </p>
+<!-- Divider -->
+<div class="flex items-center gap-4 my-2">
+<div class="flex-1 h-px bg-[#dbe3e6] dark:bg-gray-700"></div>
+<p class="text-[#617f89] dark:text-gray-400 text-sm">or</p>
+<div class="flex-1 h-px bg-[#dbe3e6] dark:bg-gray-700"></div>
+</div>
+<!-- Guest Login Button -->
+<button id="guestLoginButton" class="flex items-center justify-center text-center font-medium text-base h-14 w-full rounded-xl border-2 border-[#dbe3e6] dark:border-gray-700 text-[#111618] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 dark:focus:ring-offset-background-dark">
+<span class="material-symbols-outlined mr-2">person_outline</span>
+                    Continue as Guest
+</button>
 </div>
 </div>
 </div>
@@ -115,30 +126,6 @@
 </div>
 </div>
 <script>
-  // Initialize Clerk
-  let clerk;
-  
-  window.addEventListener('load', async () => {
-    try {
-      // Note: Replace 'YOUR_CLERK_PUBLISHABLE_KEY' in the script tag above with your actual Clerk publishable key
-      // You can get this from: https://dashboard.clerk.com/
-      
-      clerk = window.Clerk;
-      if (clerk) {
-        await clerk.load();
-        
-        // Check if user is already signed in
-        if (clerk.user) {
-          console.log('User already signed in:', clerk.user);
-          window.location.href = 'home.html';
-          return;
-        }
-      }
-    } catch (error) {
-      console.error('Clerk initialization error:', error);
-    }
-  });
-  
   // Password visibility toggle
   const passwordInput = document.getElementById('passwordInput');
   const visibilityIcon = document.querySelector('.material-symbols-outlined');
@@ -155,13 +142,13 @@
     });
   }
   
-  // Form validation and submission with Clerk
-  const loginButton = document.querySelector('button');
+  // Form validation and login
+  const loginButton = document.getElementById('loginButton');
   const emailInput = document.getElementById('emailInput');
   const emailError = document.getElementById('emailError');
   const passwordError = document.getElementById('passwordError');
   
-  loginButton.addEventListener('click', async function(e) {
+  loginButton.addEventListener('click', function(e) {
     e.preventDefault();
     
     // Reset error messages
@@ -197,81 +184,51 @@
       return;
     }
     
-    // Disable button during authentication
-    loginButton.disabled = true;
-    loginButton.textContent = 'Logging in...';
-    loginButton.classList.add('opacity-50', 'cursor-not-allowed');
+    // Get stored users from localStorage
+    const users = JSON.parse(localStorage.getItem('rentitout_users') || '[]');
     
-    try {
-      if (!clerk) {
-        throw new Error('Clerk not initialized. Please configure your Clerk publishable key.');
-      }
-      
-      // Sign in with Clerk using email and password
-      const signInAttempt = await clerk.client.signIn.create({
-        identifier: email,
-        password: password,
-      });
-      
-      if (signInAttempt.status === 'complete') {
-        // Sign in successful
-        await clerk.setActive({ session: signInAttempt.createdSessionId });
-        console.log('Login successful with Clerk:', clerk.user);
-        
-        // Store user data in localStorage if needed
-        localStorage.setItem('userEmail', clerk.user.primaryEmailAddress.emailAddress);
-        localStorage.setItem('userId', clerk.user.id);
-        
-        // Redirect to home page
-        window.location.href = 'home.html';
-      } else {
-        // Sign in requires additional steps (2FA, etc.)
-        console.log('Additional authentication required:', signInAttempt);
-        emailError.textContent = 'Additional authentication required. Please check your email.';
-        emailError.classList.remove('hidden');
-      }
-    } catch (error) {
-      console.error('Clerk authentication error:', error);
-      
-      // Handle specific Clerk errors
-      let errorMessage = 'Login failed. Please check your credentials.';
-      
-      if (error.errors && error.errors.length > 0) {
-        const clerkError = error.errors[0];
-        
-        switch (clerkError.code) {
-          case 'form_identifier_not_found':
-            errorMessage = 'Account not found. Please check your email or sign up.';
-            emailError.textContent = errorMessage;
-            emailError.classList.remove('hidden');
-            emailInput.classList.add('border-red-500');
-            break;
-          case 'form_password_incorrect':
-            errorMessage = 'Incorrect password. Please try again.';
-            passwordError.textContent = errorMessage;
-            passwordError.classList.remove('hidden');
-            passwordInput.classList.add('border-red-500');
-            break;
-          case 'session_exists':
-            // User already logged in
-            window.location.href = 'home.html';
-            return;
-          default:
-            errorMessage = clerkError.longMessage || clerkError.message || errorMessage;
-            emailError.textContent = errorMessage;
-            emailError.classList.remove('hidden');
-        }
-      } else {
-        emailError.textContent = errorMessage;
-        emailError.classList.remove('hidden');
-      }
-    } finally {
-      // Re-enable button
-      loginButton.disabled = false;
-      loginButton.textContent = 'Log In';
-      loginButton.classList.remove('opacity-50', 'cursor-not-allowed');
+    // Find user with matching email and password
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (!user) {
+      // If no user found, still redirect to home (for testing)
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userName', 'Guest User');
+      window.location.href = 'home.html';
+      return;
     }
+    
+    // Store login state and user data in localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', user.email);
+    localStorage.setItem('userId', user.id);
+    localStorage.setItem('userName', user.fullName);
+    
+    console.log('Login successful:', user.email);
+    
+    // Redirect to home page
+    window.location.href = 'home.html';
   });
+  
+  // Guest Login Button
+  const guestLoginButton = document.getElementById('guestLoginButton');
+  if (guestLoginButton) {
+    guestLoginButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Set guest user data
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', 'guest@rentitout.com');
+      localStorage.setItem('userName', 'Guest User');
+      localStorage.setItem('userId', 'guest_' + Date.now());
+      
+      console.log('Guest login successful');
+      
+      // Redirect to home page
+      window.location.href = 'home.html';
+    });
+  }
   
   // Clear error message on input
   emailInput.addEventListener('input', function() {
@@ -288,10 +245,10 @@
     }
   });
   
-  // Forgot password link with Clerk
+  // Forgot password link
   const forgotPasswordLink = document.querySelector('a.text-primary');
   if (forgotPasswordLink) {
-    forgotPasswordLink.addEventListener('click', async function(e) {
+    forgotPasswordLink.addEventListener('click', function(e) {
       e.preventDefault();
       
       const email = emailInput.value.trim();
@@ -303,36 +260,22 @@
         return;
       }
       
-      try {
-        if (!clerk) {
-          throw new Error('Clerk not initialized');
-        }
-        
-        // Send password reset email via Clerk
-        await clerk.client.signIn.create({
-          strategy: 'reset_password_email_code',
-          identifier: email,
-        });
-        
-        emailError.textContent = 'Password reset link sent to ' + email;
-        emailError.classList.remove('hidden');
-        emailError.classList.remove('text-red-500');
-        emailError.classList.add('text-green-500');
-        
-        console.log('Password reset requested for:', email);
-        
-        // Reset color back after 5 seconds
-        setTimeout(() => {
-          emailError.classList.add('text-red-500');
-          emailError.classList.remove('text-green-500');
-          emailError.classList.add('hidden');
-        }, 5000);
-      } catch (error) {
-        console.error('Password reset error:', error);
-        emailError.textContent = 'Failed to send reset email. Please try again.';
-        emailError.classList.remove('hidden');
-      }
+      // Simulate password reset
+      emailError.textContent = 'Password reset link sent to ' + email;
+      emailError.classList.remove('hidden');
+      emailError.classList.remove('text-red-500');
+      emailError.classList.add('text-green-500');
+      
+      console.log('Password reset requested for:', email);
+      
+      // Reset color back after 5 seconds
+      setTimeout(() => {
+        emailError.classList.add('text-red-500');
+        emailError.classList.remove('text-green-500');
+        emailError.classList.add('hidden');
+      }, 5000);
     });
   }
 </script>
+<script src="js/theme.js"></script>
 </body></html>
