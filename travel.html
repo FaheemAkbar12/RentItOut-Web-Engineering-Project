@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentItOut - Travel Sharing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+    </style>
+</head>
+<body class="font-display">
+<!-- Dark Mode Toggle -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
+<div class="relative flex min-h-screen w-full bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<aside class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none">
+<div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="home.html">
+<span class="material-symbols-outlined text-xl">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="itemlisting.html">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="add.html">
+<span class="material-symbols-outlined text-xl">add_box</span>
+<span>Rent In</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="addride.html">
+<span class="material-symbols-outlined text-xl">add_road</span>
+<span>Post Ride</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 bg-primary/10 text-primary font-bold" href="travel.html">
+<span class="material-symbols-outlined text-xl">directions_car</span>
+<span>Travel Sharing</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="userddash.html">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDP2JWABigKsNHekCBc0XMQcKL4HHg134bWiDX0pM2GF6O81xGC-temAoIn1msf1gqQQlNxSQ4kgRej6ZpQScm5bNJXpWHn2BD_e4PSvUIuYtVSkCnsWrnVbRD3kAibinr7_JvMbApJzLUiAUP_BYJSeUG_n2HnAKT26HVd4l3ticBn2kLhhS2j5ZtURZgR-z4mF0XJulER193vlFSpWz4jdm8jBU0T5ptyMqG3BSxM3OqT7kzik-KIbvnvRGyzYKuqru82GrNhi58");'></div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Faheem Akbar</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">fammyalpha@gmail.com</p>
+</div>
+<button class="ml-auto flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-gray-800 dark:text-gray-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400">notifications</span>
+</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<main class="flex-1 px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+<div class="layout-content-container flex flex-col max-w-7xl mx-auto flex-1 gap-8">
+<div class="bg-white dark:bg-gray-900/50 rounded-xl shadow-sm p-6 lg:p-8">
+<div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+<p class="text-gray-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Find a Ride</p>
+<button onclick="window.location.href='addride.html'" class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+Post a Ride
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-end">
+<label class="flex flex-col min-w-40 flex-1 lg:col-span-2 xl:col-span-1">
+<p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal pb-2">Origin</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">trip_origin</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 pl-10 pr-4 py-3 text-base font-normal leading-normal" placeholder="Karachi" value=""/>
+</div>
+</label>
+<label class="flex flex-col min-w-40 flex-1 lg:col-span-2 xl:col-span-1">
+<p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal pb-2">Destination</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">location_on</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 pl-10 pr-4 py-3 text-base font-normal leading-normal" placeholder="Lahore" value=""/>
+</div>
+</label>
+<label class="flex flex-col min-w-40 flex-1">
+<p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal pb-2">Date</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">calendar_month</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:border-primary h-14 placeholder:text-gray-400 dark:placeholder:text-gray-500 pl-10 pr-4 py-3 text-base font-normal leading-normal" placeholder="Select Date" type="text" value="October 26, 2024"/>
+</div>
+</label>
+<div class="flex flex-col w-full">
+<div class="flex w-full items-center justify-between pb-2">
+<p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Seats</p>
+<p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">2</p>
+</div>
+<div class="relative h-14 flex items-center">
+<input class="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary" max="8" min="1" type="range" value="2"/>
+</div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-primary text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] px-4">
+<span class="material-symbols-outlined">search</span>
+<span>Search</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-primary/20 text-primary font-semibold">
+<span class="material-symbols-outlined text-xl">view_list</span> List View
+                            </button>
+<button class="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-transparent text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 font-medium">
+<span class="material-symbols-outlined text-xl">map</span> Map View
+                            </button>
+</div>
+<div>
+<label class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                                Sort by:
+                                <select class="form-select rounded-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-primary/50 focus:border-primary">
+<option>Earliest Departure</option>
+<option>Lowest Price</option>
+<option>Recently Added</option>
+</select>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="ride-card flex flex-col bg-white dark:bg-gray-900/50 rounded-xl shadow-sm overflow-hidden transition-shadow hover:shadow-lg cursor-pointer"
+     data-ride-id="1"
+     data-origin="Karachi"
+     data-destination="Lahore"
+     data-departure="October 26, 2024 at 9:00 AM"
+     data-price="9800"
+     data-seats="2"
+     data-bags="1"
+     data-driver-name="Jane D."
+     data-driver-rating="4.9"
+     data-driver-reviews="12"
+     data-driver-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAysHdyAmtNJGBTR70NPWW9iQVfx4I57rc52KAHZes6C3PkTXRoY99YbTl0qG40rZ-sI9NtZ-3D63s1acp65b2SQftjvXNATiuDCFxsHhC8mlu41NUUhL7MXyq_w0PRCqvrYhyYkD8sSAHbV6G-ExX7TUpoxMAxSmpbDV_jp7WQ1Xnj8BGDzZ7ENXoGhKNfEAA18L-MC2eAznoRGRGnOjP63sL-L7ORaHeR55kuAAlRF64IZHHFholUFHzgbA4NBTpbdSPPPvoJt_g"
+     data-amenities="AC,WiFi,Music">
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">October 26, 2024 at 9:00 AM</p>
+</div>
+<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR 1,800</div>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                                    Karachi <span class="text-primary mx-1">→</span> Lahore
+                                </h3>
+<div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-sm">2 seats available</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">luggage</span>
+<span class="text-sm">1 bag</span>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-gray-900">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Driver Jane D.'s avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAysHdyAmtNJGBTR70NPWW9iQVfx4I57rc52KAHZes6C3PkTXRoY99YbTl0qG40rZ-sI9NtZ-3D63s1acp65b2SQftjvXNATiuDCFxsHhC8mlu41NUUhL7MXyq_w0PRCqvrYhyYkD8sSAHbV6G-ExX7TUpoxMAxSmpbDV_jp7WQ1Xnj8BGDzZ7ENXoGhKNfEAA18L-MC2eAznoRGRGnOjP63sL-L7ORaHeR55kuAAlRF64IZHHFholUFHzgbA4NBTpbdSPPPvoJt_g");'></div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Jane D.</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">4.9 ★ (12 reviews)</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-primary/90 hover:bg-primary text-white text-sm font-bold">View Trip</button>
+</div>
+</div>
+</div>
+<div class="ride-card flex flex-col bg-white dark:bg-gray-900/50 rounded-xl shadow-sm overflow-hidden transition-shadow hover:shadow-lg cursor-pointer"
+     data-ride-id="2"
+     data-origin="Islamabad"
+     data-destination="Peshawar"
+     data-departure="October 26, 2024 at 11:30 AM"
+     data-price="12600"
+     data-seats="3"
+     data-bags="2"
+     data-driver-name="Mark S."
+     data-driver-rating="5.0"
+     data-driver-reviews="31"
+     data-driver-image="https://lh3.googleusercontent.com/aida-public/AB6AXuB4vrcECzXcTkjDHwSgtNig9xhH4xVd0tC4TyWQbYTaKmAetoRopEE64fIH0btJML0hhzcVg8Rz7p4y2alc2NZBgcjE2nGvwk982l0KZpJufeqQ1zD98VJpN2uq8BMWxDGxoUdiDO3S9Iqinsc_0IZVPzPHKvxc7oaezK2CWXxELYAHYvlawecuUlIc3CTkhPMTXlBb9MqRIw_N8oMqcNad3Ibvl0Q0TPQWtEwsQohwWNNxxFeM3RQlRFCYAIIIwvjsmRmvGtoeaH0"
+     data-amenities="AC,Snacks">
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">October 26, 2024 at 11:30 AM</p>
+</div>
+<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR 2,300</div>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                                    Islamabad <span class="text-primary mx-1">→</span> Peshawar
+                                </h3>
+<div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-sm">3 seats available</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">luggage</span>
+<span class="text-sm">2 bags</span>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-gray-900">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Driver Mark S.'s avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4vrcECzXcTkjDHwSgtNig9xhH4xVd0tC4TyWQbYTaKmAetoRopEE64fIH0btJML0hhzcVg8Rz7p4y2alc2NZBgcjE2nGvwk982l0KZpJufeqQ1zD98VJpN2uq8BMWxDGxoUdiDO3S9Iqinsc_0IZVPzPHKvxc7oaezK2CWXxELYAHYvlawecuUlIc3CTkhPMTXlBb9MqRIw_N8oMqcNad3Ibvl0Q0TPQWtEwsQohwWNNxxFeM3RQlRFCYAIIIwvjsmRmvGtoeaH0");'></div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Mark S.</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">5.0 ★ (31 reviews)</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-primary/90 hover:bg-primary text-white text-sm font-bold">View Trip</button>
+</div>
+</div>
+</div>
+<div class="ride-card flex flex-col bg-white dark:bg-gray-900/50 rounded-xl shadow-sm overflow-hidden transition-shadow hover:shadow-lg cursor-pointer"
+     data-ride-id="3"
+     data-origin="Faisalabad"
+     data-destination="Multan"
+     data-departure="October 27, 2024 at 8:00 AM"
+     data-price="25"
+     data-seats="4"
+     data-bags="3"
+     data-driver-name="Sarah K."
+     data-driver-rating="4.7"
+     data-driver-reviews="18"
+     data-driver-image="https://lh3.googleusercontent.com/aida-public/AB6AXuAysHdyAmtNJGBTR70NPWW9iQVfx4I57rc52KAHZes6C3PkTXRoY99YbTl0qG40rZ-sI9NtZ-3D63s1acp65b2SQftjvXNATiuDCFxsHhC8mlu41NUUhL7MXyq_w0PRCqvrYhyYkD8sSAHbV6G-ExX7TUpoxMAxSmpbDV_jp7WQ1Xnj8BGDzZ7ENXoGhKNfEAA18L-MC2eAznoRGRGnOjP63sL-L7ORaHeR55kuAAlRF64IZHHFholUFHzgbA4NBTpbdSPPPvoJt_g"
+     data-amenities="WiFi,Pets">
+<div class="p-5 flex-grow">
+<div class="flex justify-between items-start mb-3">
+<div>
+<p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">October 27, 2024 at 8:00 AM</p>
+</div>
+<div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR 1,500</div>
+</div>
+<h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                                    Oakland <span class="text-primary mx-1">→</span> Sacramento
+                                </h3>
+<div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-sm">1 seat available</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">no_luggage</span>
+<span class="text-sm">No bags</span>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-gray-900">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Driver Emily R.'s avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC9rIISKCp7R1NZsepfqOQWMjV8PJz1Meo2l_6KhOiuulfDP6NrqPFQbNoYTim7p_dt-bgtBubZ2VCT6S4B7ZfRPISZ9F5eHrPf8at4tdjb1sbLcKe8YrSWFlt2JxFcBC5aPhjBcdGcbBGzEr-nDV8QlngJSMgVPDMXEBVLtupYWkkY6PGQEopPPesVCJFqakcrF6eBTafjXgEQpMadpdGlXvxAz5SwhildSvrzrxehr66X6RSWlETRMU9rvAE16XzLR5KJ36AaDtM");'></div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Emily R.</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">4.8 ★ (8 reviews)</p>
+</div>
+</div>
+<button class="px-4 py-2 rounded-lg bg-primary/90 hover:bg-primary text-white text-sm font-bold">View Trip</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+<script>
+  // Search form inputs
+  const originInput = document.querySelector('input[placeholder="San Francisco"]');
+  const destinationInput = document.querySelector('input[placeholder="Los Angeles"]');
+  const dateInput = document.querySelector('input[value*="October 26"]');
+  const seatsSlider = document.querySelector('input[type="range"]');
+  const seatsDisplay = seatsSlider?.previousElementSibling?.querySelector('p:last-child');
+  const searchBtn = document.querySelector('button[class*="bg-primary"]');
+  
+  // Seats slider functionality
+  if (seatsSlider && seatsDisplay) {
+    seatsSlider.addEventListener('input', function() {
+      seatsDisplay.textContent = this.value;
+      console.log('Seats selected:', this.value);
+    });
+  }
+  
+  // Search functionality
+  if (searchBtn && searchBtn.textContent.includes('Search')) {
+    searchBtn.addEventListener('click', function() {
+      const origin = originInput?.value.trim();
+      const destination = destinationInput?.value.trim();
+      const date = dateInput?.value.trim();
+      const seats = seatsSlider?.value;
+      
+      if (!origin || !destination) {
+        return;
+      }
+      
+      if (!date) {
+        return;
+      }
+      
+      const searchData = { origin, destination, date, seats };
+      console.log('Searching for rides:', searchData);
+      
+      // In real app, would filter/search rides
+    });
+  }
+  
+  // View toggle (List View / Map View)
+  const listViewBtn = document.querySelector('button[class*="bg-primary/20"]');
+  const mapViewBtn = listViewBtn?.nextElementSibling;
+  
+  if (listViewBtn && mapViewBtn) {
+    listViewBtn.addEventListener('click', function() {
+      console.log('List View selected');
+      this.classList.add('bg-primary/20', 'text-primary', 'font-semibold');
+      this.classList.remove('bg-transparent', 'text-gray-600', 'font-medium');
+      mapViewBtn.classList.remove('bg-primary/20', 'text-primary', 'font-semibold');
+      mapViewBtn.classList.add('bg-transparent', 'text-gray-600', 'font-medium');
+    });
+    
+    mapViewBtn.addEventListener('click', function() {
+      console.log('Map View selected');
+      this.classList.add('bg-primary/20', 'text-primary', 'font-semibold');
+      this.classList.remove('bg-transparent', 'text-gray-600', 'font-medium');
+      listViewBtn.classList.remove('bg-primary/20', 'text-primary', 'font-semibold');
+      listViewBtn.classList.add('bg-transparent', 'text-gray-600', 'font-medium');
+    });
+  }
+  
+  // Sort functionality
+  const sortSelect = document.querySelector('select');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      const sortBy = this.value;
+      console.log('Sorting by:', sortBy);
+      // In real app, would re-sort the rides
+    });
+  }
+  
+  // View Trip buttons
+  const viewTripButtons = document.querySelectorAll('button');
+  viewTripButtons.forEach((btn, index) => {
+    if (btn.textContent.trim() === 'View Trip') {
+      btn.addEventListener('click', function() {
+        console.log('View Trip clicked for ride:', index);
+        // Would open detailed trip view
+      });
+    }
+  });
+  
+  // Ride cards click handler
+  const rideCards = document.querySelectorAll('.flex.flex-col.bg-white');
+  rideCards.forEach((card, index) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      // Only trigger if not clicking on the button
+      if (!e.target.closest('button')) {
+        console.log('Ride card clicked:', index);
+      }
+    });
+  });
+  
+  // Date input - add date picker functionality
+  if (dateInput) {
+    dateInput.type = 'date';
+    dateInput.addEventListener('change', function() {
+      console.log('Date selected:', this.value);
+    });
+  }
+  
+  // Driver profile click
+  const driverProfiles = document.querySelectorAll('.flex.items-center.gap-3');
+  driverProfiles.forEach((profile, index) => {
+    const driverName = profile.querySelector('p.text-sm');
+    if (driverName) {
+      profile.style.cursor = 'pointer';
+      profile.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const name = driverName.textContent;
+        console.log('Driver profile clicked:', name);
+      });
+    }
+  });
+  
+  // Load ride details from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const rideId = urlParams.get('ride');
+  if (rideId) {
+    console.log('Loaded ride ID:', rideId);
+  }
+  
+  // Auto-complete suggestions for origin/destination (simulated) - Pakistani Cities
+  const locations = ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi', 'Faisalabad', 'Multan', 'Peshawar', 'Quetta', 'Sialkot', 'Gujranwala', 'Hyderabad', 'Abbottabad', 'Murree', 'Gilgit', 'Skardu'];
+  
+  function setupAutocomplete(input) {
+    if (!input) return;
+    
+    input.addEventListener('input', function() {
+      const value = this.value.toLowerCase();
+      if (value.length > 1) {
+        const matches = locations.filter(loc => loc.toLowerCase().includes(value));
+        console.log('Location suggestions:', matches);
+        // In real app, would show dropdown with suggestions
+      }
+    });
+  }
+  
+  setupAutocomplete(originInput);
+  setupAutocomplete(destinationInput);
+  
+  // Real-time seat availability
+  function updateRideAvailability() {
+    const seatElements = document.querySelectorAll('.flex.items-center.gap-2 span.text-sm');
+    seatElements.forEach(elem => {
+      if (elem.textContent.includes('seats available') || elem.textContent.includes('seat available')) {
+        elem.style.fontWeight = 'bold';
+        elem.style.color = '#13b6ec';
+      }
+    });
+  }
+  
+  updateRideAvailability();
+  
+  // Load rides from localStorage
+  async function loadRides() {
+    const ridesContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3');
+    if (!ridesContainer) return;
+    
+    try {
+      // Get rides from localStorage
+      const localRides = JSON.parse(localStorage.getItem('localRides') || '[]');
+      const storageRides = JSON.parse(localStorage.getItem('rentitout_travel') || '[]');
+      
+      // Combine all rides
+      const allRides = [...localRides, ...storageRides];
+      
+      if (allRides.length > 0) {
+        // Add new rides
+        allRides.forEach((ride, index) => {
+          const rideCard = createRideCard(ride, 'stored_' + index);
+          ridesContainer.appendChild(rideCard);
+        });
+        
+        // Re-attach click handlers
+        attachRideClickHandlers();
+      }
+      
+      console.log('Loaded rides:', allRides.length);
+    } catch (error) {
+      console.error('Error loading rides:', error);
+    }
+  }
+  
+  // Create ride card HTML
+  function createRideCard(ride, id) {
+    const div = document.createElement('div');
+    div.className = 'ride-card flex flex-col bg-white dark:bg-gray-900/50 rounded-xl shadow-sm overflow-hidden transition-shadow hover:shadow-lg cursor-pointer';
+    
+    // Extract data based on structure
+    const origin = ride.route?.origin?.city || ride.origin || 'Unknown';
+    const destination = ride.route?.destination?.city || ride.destination || 'Unknown';
+    const departureTime = new Date(ride.departureTime || ride.departureDate);
+    const formattedDate = departureTime.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const formattedTime = departureTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    const price = ride.pricing?.pricePerSeat || ride.price || 0;
+    const seats = ride.seating?.availableSeats || ride.seats || 0;
+    const bags = ride.luggage?.allowedBags || ride.bags || 1;
+    const driverName = ride.driver?.name || 'Driver';
+    const driverRating = ride.driver?.rating || 4.5;
+    const driverReviews = ride.driver?.reviewCount || 0;
+    const driverImage = ride.driver?.imageUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuAysHdyAmtNJGBTR70NPWW9iQVfx4I57rc52KAHZes6C3PkTXRoY99YbTl0qG40rZ-sI9NtZ-3D63s1acp65b2SQftjvXNATiuDCFxsHhC8mlu41NUUhL7MXyq_w0PRCqvrYhyYkD8sSAHbV6G-ExX7TUpoxMAxSmpbDV_jp7WQ1Xnj8BGDzZ7ENXoGhKNfEAA18L-MC2eAznoRGRGnOjP63sL-L7ORaHeR55kuAAlRF64IZHHFholUFHzgbA4NBTpbdSPPPvoJt_g';
+    const amenities = (ride.amenities || []).join(',');
+    
+    // Set data attributes
+    div.dataset.rideId = ride._id || ride.id || id;
+    div.dataset.origin = origin;
+    div.dataset.destination = destination;
+    div.dataset.departure = `${formattedDate} at ${formattedTime}`;
+    div.dataset.price = price;
+    div.dataset.seats = seats;
+    div.dataset.bags = bags;
+    div.dataset.driverName = driverName;
+    div.dataset.driverRating = driverRating;
+    div.dataset.driverReviews = driverReviews;
+    div.dataset.driverImage = driverImage;
+    div.dataset.amenities = amenities;
+    
+    div.innerHTML = `
+      <div class="p-5 flex-grow">
+        <div class="flex justify-between items-start mb-3">
+          <div>
+            <p class="text-xs text-gray-500 dark:text-gray-400">DEPARTURE</p>
+            <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">${formattedDate} at ${formattedTime}</p>
+          </div>
+          <div class="bg-primary/20 text-primary text-sm font-bold px-3 py-1 rounded-full">PKR ${price}</div>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">
+          ${origin} <span class="text-primary mx-1">→</span> ${destination}
+        </h3>
+        <div class="flex items-center gap-4 text-gray-600 dark:text-gray-300">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-xl">group</span>
+            <span class="text-sm">${seats} seat${seats !== 1 ? 's' : ''} available</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-xl">luggage</span>
+            <span class="text-sm">${bags} bag${bags !== 1 ? 's' : ''}</span>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-200 dark:border-gray-800 p-4 bg-gray-50 dark:bg-gray-900">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style="background-image: url('${driverImage}')"></div>
+            <div>
+              <p class="text-sm font-semibold text-gray-800 dark:text-gray-200">${driverName}</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">${driverRating} ★ (${driverReviews} reviews)</p>
+            </div>
+          </div>
+          <button class="px-4 py-2 rounded-lg bg-primary/90 hover:bg-primary text-white text-sm font-bold">View Trip</button>
+        </div>
+      </div>
+    `;
+    
+    return div;
+  }
+  
+  // Attach click handlers to all ride cards
+  function attachRideClickHandlers() {
+    document.querySelectorAll('.ride-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Don't navigate if clicking on View Trip button
+      if (e.target.closest('button')) return;
+      
+      const rideData = {
+        id: this.dataset.rideId,
+        origin: this.dataset.origin,
+        destination: this.dataset.destination,
+        departure: this.dataset.departure,
+        price: this.dataset.price,
+        seats: this.dataset.seats,
+        bags: this.dataset.bags,
+        driverName: this.dataset.driverName,
+        driverRating: this.dataset.driverRating,
+        driverReviews: this.dataset.driverReviews,
+        driverImage: this.dataset.driverImage,
+        amenities: this.dataset.amenities
+      };
+      
+      // Navigate to detail page with URL parameters
+      const params = new URLSearchParams(rideData);
+      window.location.href = `traveldetail.html?${params.toString()}`;
+    });
+  });
+  }
+  
+  // Initial attachment of click handlers
+  attachRideClickHandlers();
+  
+  // Load rides on page load
+  loadRides();
+  
+  // View Trip button handler
+  document.querySelectorAll('button').forEach(btn => {
+    if (btn.textContent.includes('View Trip')) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const card = this.closest('.ride-card');
+        if (card) {
+          const rideData = {
+            id: card.dataset.rideId,
+            origin: card.dataset.origin,
+            destination: card.dataset.destination,
+            departure: card.dataset.departure,
+            price: card.dataset.price,
+            seats: card.dataset.seats,
+            bags: card.dataset.bags,
+            driverName: card.dataset.driverName,
+            driverRating: card.dataset.driverRating,
+            driverReviews: card.dataset.driverReviews,
+            driverImage: card.dataset.driverImage,
+            amenities: card.dataset.amenities
+          };
+          const params = new URLSearchParams(rideData);
+          window.location.href = `traveldetail.html?${params.toString()}`;
+        }
+      });
+    }
+  });
+</script>
+<script src="js/theme.js"></script>
+
+</body></html>

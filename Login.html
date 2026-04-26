@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentItOut - Login Page</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#13b6ec",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="font-display">
+<!-- Dark Mode Toggle Button -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center">
+<div class="layout-content-container flex flex-col w-full flex-1">
+<div class="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+<!-- Left Column: Image & Branding -->
+<div class="relative hidden lg:flex flex-col justify-between p-12 bg-center bg-no-repeat bg-cover shine-effect" style='background-image: url("https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=2071&auto=format&fit=crop");'>
+<div class="absolute inset-0 bg-gradient-to-br from-primary/90 to-purple-900/90"></div>
+<div class="relative z-10 flex items-center gap-3">
+<span class="material-symbols-outlined text-white text-4xl">
+                  travel_explore
+                </span>
+<h1 class="text-white text-2xl font-bold">RentItOut</h1>
+</div>
+<div class="relative z-10">
+<p class="text-white text-4xl font-bold leading-tight">Share More. <br/>Own Less.</p>
+<p class="text-white/80 text-lg mt-2">Join a community of renters and lenders today.</p>
+</div>
+</div>
+<!-- Right Column: Login Form -->
+<div class="flex flex-col items-center justify-center w-full bg-gradient-to-br from-gray-50 to-white dark:from-background-dark dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-md space-y-8 glass p-8 rounded-2xl shadow-2xl">
+<!-- Header -->
+<div class="flex flex-col gap-3">
+<p class="text-[#111618] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Welcome Back</p>
+<p class="text-[#617f89] dark:text-gray-400 text-base font-normal leading-normal">Log in to continue your RentItOut journey.</p>
+</div>
+<!-- Form -->
+<div class="flex flex-col gap-6">
+<!-- Email Field -->
+<label class="flex flex-col w-full">
+<p class="text-[#111618] dark:text-gray-200 text-base font-medium leading-normal pb-2">Email or Username</p>
+<div class="flex w-full flex-1 items-stretch rounded-xl">
+<input id="emailInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#111618] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark/50 h-14 placeholder:text-[#617f89] dark:placeholder:text-gray-500 p-[15px] text-base font-normal leading-normal" placeholder="Enter your email or username" value=""/>
+</div>
+<p id="emailError" class="text-red-500 text-sm mt-1 hidden">Please enter your email or username</p>
+</label>
+<!-- Password Field -->
+<div class="flex flex-col w-full">
+<div class="flex justify-between items-center pb-2">
+<p class="text-[#111618] dark:text-gray-200 text-base font-medium leading-normal">Password</p>
+<a class="text-primary text-sm font-medium leading-normal underline" href="#">Forgot Password?</a>
+</div>
+<div class="flex w-full flex-1 items-stretch rounded-xl">
+<input id="passwordInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-l-xl text-[#111618] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark/50 h-14 placeholder:text-[#617f89] dark:placeholder:text-gray-500 p-[15px] border-r-0 text-base font-normal leading-normal" placeholder="Enter your password" type="password" value=""/>
+<div class="text-[#617f89] dark:text-gray-400 flex border border-[#dbe3e6] dark:border-gray-700 bg-white dark:bg-background-dark/50 items-center justify-center px-4 rounded-r-xl border-l-0 cursor-pointer">
+<span class="material-symbols-outlined text-2xl">visibility</span>
+</div>
+</div>
+<p id="passwordError" class="text-red-500 text-sm mt-1 hidden">Please enter your password</p>
+</div>
+<!-- Login Button -->
+<button id="loginButton" class="flex items-center justify-center text-center font-bold text-base h-14 w-full rounded-xl gradient-primary text-white hover:shadow-2xl hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark mt-4 shine-effect">
+                    Log In
+                  </button>
+<!-- Sign Up Link -->
+<p class="text-center text-[#617f89] dark:text-gray-400 text-base font-normal leading-normal">
+                    Don't have an account? <a class="font-bold text-primary hover:underline" href="signup.html">Sign Up</a>
+</p>
+<!-- Divider -->
+<div class="flex items-center gap-4 my-2">
+<div class="flex-1 h-px bg-[#dbe3e6] dark:bg-gray-700"></div>
+<p class="text-[#617f89] dark:text-gray-400 text-sm">or</p>
+<div class="flex-1 h-px bg-[#dbe3e6] dark:bg-gray-700"></div>
+</div>
+<!-- Guest Login Button -->
+<button id="guestLoginButton" class="flex items-center justify-center text-center font-medium text-base h-14 w-full rounded-xl border-2 border-[#dbe3e6] dark:border-gray-700 text-[#111618] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 dark:focus:ring-offset-background-dark">
+<span class="material-symbols-outlined mr-2">person_outline</span>
+                    Continue as Guest
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Password visibility toggle
+  const passwordInput = document.getElementById('passwordInput');
+  const visibilityIcon = document.querySelector('.material-symbols-outlined');
+  
+  if (visibilityIcon && passwordInput) {
+    visibilityIcon.parentElement.addEventListener('click', function() {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        visibilityIcon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        visibilityIcon.textContent = 'visibility';
+      }
+    });
+  }
+  
+  // Form validation and login
+  const loginButton = document.getElementById('loginButton');
+  const emailInput = document.getElementById('emailInput');
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+  
+  loginButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Reset error messages
+    emailError.classList.add('hidden');
+    passwordError.classList.add('hidden');
+    emailInput.classList.remove('border-red-500');
+    passwordInput.classList.remove('border-red-500');
+    
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    
+    let hasError = false;
+    
+    if (!email) {
+      emailError.textContent = 'Please enter your email or username';
+      emailError.classList.remove('hidden');
+      emailInput.classList.add('border-red-500');
+      emailInput.focus();
+      hasError = true;
+    }
+    
+    if (!password) {
+      passwordError.textContent = 'Please enter your password';
+      passwordError.classList.remove('hidden');
+      passwordInput.classList.add('border-red-500');
+      if (!hasError) {
+        passwordInput.focus();
+      }
+      hasError = true;
+    }
+    
+    if (hasError) {
+      return;
+    }
+    
+    // Get stored users from localStorage
+    const users = JSON.parse(localStorage.getItem('rentitout_users') || '[]');
+    
+    // Find user with matching email and password
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (!user) {
+      // If no user found, still redirect to home (for testing)
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userName', 'Guest User');
+      window.location.href = 'home.html';
+      return;
+    }
+    
+    // Store login state and user data in localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userEmail', user.email);
+    localStorage.setItem('userId', user.id);
+    localStorage.setItem('userName', user.fullName);
+    
+    console.log('Login successful:', user.email);
+    
+    // Redirect to home page
+    window.location.href = 'home.html';
+  });
+  
+  // Guest Login Button
+  const guestLoginButton = document.getElementById('guestLoginButton');
+  if (guestLoginButton) {
+    guestLoginButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Set guest user data
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userEmail', 'guest@rentitout.com');
+      localStorage.setItem('userName', 'Guest User');
+      localStorage.setItem('userId', 'guest_' + Date.now());
+      
+      console.log('Guest login successful');
+      
+      // Redirect to home page
+      window.location.href = 'home.html';
+    });
+  }
+  
+  // Clear error message on input
+  emailInput.addEventListener('input', function() {
+    if (this.value.trim()) {
+      emailError.classList.add('hidden');
+      this.classList.remove('border-red-500');
+    }
+  });
+  
+  passwordInput.addEventListener('input', function() {
+    if (this.value.trim()) {
+      passwordError.classList.add('hidden');
+      this.classList.remove('border-red-500');
+    }
+  });
+  
+  // Forgot password link
+  const forgotPasswordLink = document.querySelector('a.text-primary');
+  if (forgotPasswordLink) {
+    forgotPasswordLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const email = emailInput.value.trim();
+      
+      if (!email) {
+        emailError.textContent = 'Please enter your email address first';
+        emailError.classList.remove('hidden');
+        emailInput.focus();
+        return;
+      }
+      
+      // Simulate password reset
+      emailError.textContent = 'Password reset link sent to ' + email;
+      emailError.classList.remove('hidden');
+      emailError.classList.remove('text-red-500');
+      emailError.classList.add('text-green-500');
+      
+      console.log('Password reset requested for:', email);
+      
+      // Reset color back after 5 seconds
+      setTimeout(() => {
+        emailError.classList.add('text-red-500');
+        emailError.classList.remove('text-green-500');
+        emailError.classList.add('hidden');
+      }, 5000);
+    });
+  }
+</script>
+<script src="js/theme.js"></script>
+</body></html>

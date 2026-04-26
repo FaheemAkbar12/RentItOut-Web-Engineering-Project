@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentItOut - Item Detail</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                        "dark-charcoal": "#2D3748",
+                        "dark-charcoal-dark": "#E2E8F0",
+                        "light-gray-bg": "#F7FAFC",
+                        "light-gray-bg-dark": "#1A202C",
+                        "light-gray-border": "#E2E8F0",
+                        "light-gray-border-dark": "#4A5568",
+                        "subtle-blue": "#3182CE",
+                        "warm-yellow": "#FBBF24"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-dark-charcoal dark:text-dark-charcoal-dark">
+<!-- Dark Mode Toggle -->
+<button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+  <div class="theme-toggle-circle">
+    <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+  </div>
+</button>
+
+<div class="relative flex h-auto min-h-screen w-full group/design-root overflow-x-hidden">
+<aside class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none hidden lg:flex">
+<div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="home.html">
+<span class="material-symbols-outlined text-xl">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 bg-primary/10 text-primary font-bold" href="itemlisting.html">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="add.html">
+<span class="material-symbols-outlined text-xl">add_box</span>
+<span>Rent In</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="addride.html">
+<span class="material-symbols-outlined text-xl">add_road</span>
+<span>Post Ride</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="travel.html">
+<span class="material-symbols-outlined text-xl">directions_car</span>
+<span>Travel Sharing</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium" href="userddash.html">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
+</nav>
+</nav>
+<div class="mt-auto border-t border-gray-200 dark:border-gray-800 p-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User's profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0pHpc7feD3MneUTt96qkuuQZstE-V_DVLHZrLvbrXKsx9b6tloEOBQt3NxJ6A4YkhTd8XkAuiREfhzE7guMnw1Q-XvYHp2-lMQdvP-5vNHh2ppbg3EwBYcaBljUTOaTIzAgmjW26rTUdwzjuUUmA8fRYSheejysvULnTBFK2au2uA03dB0JRgwyIAo4cUIyh11CTCdN2O3gmYD86w8U1ImHrFXBD_XCAgCitnKcXnu_9FtepcPyArvHfv9yZdWrA1DfNpmm_nGDI");'></div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Faheem Akbar</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">fammyalpha@gmail.com</p>
+</div>
+<button class="ml-auto flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-gray-800 dark:text-gray-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400">notifications</span>
+</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="sticky top-0 z-40 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-light-gray-border dark:border-light-gray-border-dark shadow-sm">
+<div class="container mx-auto px-4 lg:px-6">
+<div class="flex items-center justify-between h-16 gap-4">
+<div class="flex items-center gap-4">
+<button class="lg:hidden p-2 -ml-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<label class="hidden md:flex flex-col min-w-64 !h-10 max-w-96">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full shadow-sm">
+<div class="text-gray-500 dark:text-gray-400 flex bg-gray-100 dark:bg-gray-800 items-center justify-center pl-4 rounded-l-xl border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-xl text-dark-charcoal dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/30 border-none bg-gray-100 dark:bg-gray-800 h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-3 text-sm font-normal leading-normal transition-all" placeholder="Search for items..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-end gap-4">
+<div class="hidden sm:flex gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity">
+<span class="truncate">Sign Up</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-100 dark:bg-gray-700 text-dark-charcoal dark:text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+<span class="truncate">Log In</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 lg:hidden" data-alt="User's profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0pHpc7feD3MneUTt96qkuuQZstE-V_DVLHZrLvbrXKsx9b6tloEOBQt3NxJ6A4YkhTd8XkAuiREfhzE7guMnw1Q-XvYHp2-lMQdvP-5vNHh2ppbg3EwBYcaBljUTOaTIzAgmjW26rTUdwzjuUUmA8fRYSheejysvULnTBFK2au2uA03dB0JRgwyIAo4cUIyh11CTCdN2O3gmYD86w8U1ImHrFXBD_XCAgCitnKcXnu_9FtepcPyArvHfv9yZdWrA1DfNpmm_nGDI");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="container mx-auto px-4 lg:px-6 py-6 lg:py-8">
+<div class="layout-content-container flex flex-col w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3 pb-4">
+<button onclick="window.location.href='itemlisting.html'" class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-all shadow-sm hover:shadow">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+<span class="text-sm font-semibold">Back to Listings</span>
+</button>
+</div>
+<div class="flex flex-wrap gap-2 pb-4">
+<a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-subtle-blue dark:hover:text-subtle-blue" href="home.html">Home</a>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+<a class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-subtle-blue dark:hover:text-subtle-blue" href="itemlisting.html">Electronics</a>
+<span class="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">/</span>
+<span class="text-dark-charcoal dark:text-dark-charcoal-dark text-sm font-medium leading-normal">Camera</span>
+</div>
+<div class="flex flex-wrap justify-between gap-4 items-start pb-8">
+<div class="flex flex-col gap-3">
+<h1 class="text-dark-charcoal dark:text-dark-charcoal-dark text-3xl md:text-4xl lg:text-5xl font-black leading-tight tracking-[-0.033em]">Canon EOS R5 Mirrorless Camera</h1>
+<p class="text-gray-600 dark:text-gray-400 text-base md:text-lg font-medium leading-relaxed">Professional grade, includes 24-70mm lens</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-red-900/20 hover:border-red-300 dark:hover:border-red-800 transition-all shadow-sm hover:shadow group">
+<span class="material-symbols-outlined text-red-500 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 0;">favorite</span>
+<span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Save</span>
+</button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-2xl min-h-[400px] md:min-h-[480px] lg:min-h-[520px] shadow-lg hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700" data-alt="Main view of the Canon EOS R5 camera body with a lens attached, sitting on a clean surface" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYZGxs0TUQmf1iWv825iQHELI78oReKZeM5oL7Sfuy8ss_DNFqaNRJNYOlShoiVpLcChjojIho39vtj5nhGCzRYyTc_nAze__D6kdVMvcyJaQ3s5NdyQpXlnL6oY-GVPPMNSv__zt9jujDRn7CDeU7eByBifsOgNCrupVUQ_0H6TGosNi5fT3fZz6txsrG8hUThmDLCqImkrM02ES2JFqXzTrviZfxNTqpWiEo0iWZZYO9pafmWOSJ2C5Zzw3a2ODd-ymUsi3z8bo");'></div>
+<div class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer border-2 border-primary" data-alt="Side view of the Canon camera showing its ports" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1VT4l5zSHDJ7T0BkD25f83ajv_desyEHiHY3fq7hxp_r8RkoP-dLpYmF0gfHyUI0zBe7zD9pyHP2ZqRZlfEMd3bRvXeV9F1vm6HQK8FCC2-QgDpkulwtb2Ig1Ui9ESTz4M030cqEB6MASj2s7Cdu87fudioqMMlNuG4d7ykxdM84CYWZj3XQKloGR3bdvAePYuhVYYH_frsnrhYVsatfpeDWf4Ue4jl9BklZ_lbe28nkVavD7cw64m4buUBdyhZvfoa96cbqpw00");'></div>
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="Close-up of the camera lens" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCJBnIXQpinFkBIejOYh67f1edgOboovT_safMAAsTosbrtZjcNy4B7QPCLDbUjKYDrYK9U8kDttC1F5srJugqVh-ThBE5SJ_lonWXp9njPlW_84U2OjQpBaLaQyIKA_iAfhwp5mzdIVEGn02DQjzhK0RVyxI-Q4FowP1v_oKnfqJgjRxDxuickKJqckkXpGX2grWlNZryegrK1RFeEVnw1YykMDFopy9qI4aegzzZywMx3b2RlpCc907xM-gHGDOPrQKFzIvoJ8W4");'></div>
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="Back of the camera showing the LCD screen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABI2yKh7B84N5ETI_JrIFpycw0kh0vDTLxWTBLz0U3Ty1SGKC61gGtEybkghucpGMd45EHAvM3HvCryOHx5xGzmLZzaQeH1ZNLnT8XtPAUeI2eegtEPHkmhT3zw0Vd2WpbVvZAy0z5SOu45r2Qu5rAjhcjeM5xL1o1KVzUbSiln-bQJ_9JB_R9UGKFa2ZJ0tnWO7-6jKsQMqXEO3u0PPT-XDfoDuqnCKfi14CaR-Cah9bgI_osbihdZZBeZH4w52QhrsfwtyjTrUU");'></div>
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="A person holding the camera to demonstrate its size" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAa6GnCU0CMdtCukGxdhE94Hn1ftbfY5EnWCnJjole3zs07luBP0vqnxet9ORk_NfIDVaV8TMovYhOHSx2cEdB5wWvQ0GrRhL02JK46v3JBPWGQBHLK4smhkgRYZizBw8LmCH8Sk_pnOCW6vkulHyCbHx3W9ZHd8ySP10ApWCV3k44T8U3qtXGBCcCXivzDkmi5Slo--tmOTUe8G4SJNRZv7dxuL8_5muUipux32GR42pdIgEprS9axDoM1d3RovcXvaOy3le95XFA");'></div>
+<div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg cursor-pointer opacity-70 hover:opacity-100 transition-opacity" data-alt="The camera shown with included accessories like batteries and a strap" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBuAnnkQwwYwuKqNR4D_pwSov3o2a8Yp6UKniGMXoTTUG20rDWfGFD1r7_C6N5QKRmaApcHWRXm8F4-bWRh68Oo9BjeoXB5jAtXpQ7Yo-lxb2tujn1WfhTJ4RRJinKpJ2EdW-tlbphlxNYWBmBnRnuD60lW5HcsGAMRaPrxspoc8VEP1v8bDBWnxq-WsA2tdLKs7wD7f8YUqIAVWO2FCBzu6Dotw39NobCAfZrhT6adLXs4LdWoiSueRY_kwbQepDeCYFTjU6UwBvI");'></div>
+</div>
+</div>
+<div class="lg:col-span-1 flex flex-col gap-6">
+<div class="p-6 lg:p-8 rounded-2xl border-2 border-light-gray-border dark:border-light-gray-border-dark bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 shadow-xl sticky top-24">
+<div class="mb-6">
+<p class="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wider">Price per day</p>
+<p class="text-4xl font-black text-dark-charcoal dark:text-dark-charcoal-dark mt-1">PKR 2,500</p>
+</div>
+<div class="flex flex-col gap-3">
+<button id="rentNowBtn" class="w-full flex items-center justify-center gap-2 rounded-xl h-14 px-6 bg-gradient-to-r from-primary to-blue-500 text-white text-base font-bold leading-normal tracking-wide hover:shadow-lg hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="truncate">Rent Now</span>
+</button>
+<button id="chatOwnerBtn" class="w-full flex items-center justify-center gap-2 rounded-xl h-14 px-6 border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-dark-charcoal dark:text-white text-base font-bold leading-normal hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500 transition-all">
+<span class="material-symbols-outlined">chat</span>
+<span class="truncate">Chat with Owner</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4 p-5 rounded-2xl border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-14" data-alt="Profile picture of the item owner, Alex Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcm8NAmKPVv_WpDsC2TsN75C7NIvzszWwqF9GlODBXFLrFcCNRbr-bo8GJsPUcZn4TIJECxV-_lSGrErKSmx3ivpvanqs05gGVRB8NVXDEn9x5DTjP5_JdLOZ9y4vPDamAcmg4oGmyPZWbN9hbKlpKJ-1DvqBI11qKi56G38JfH1VHUZChz4hKl5U7IGGwWtpIgIKZ4ORzJmGGDbe8sTs8UC6zk8DZRy_a6VkjCu9MpSK7W_9HRpULrOroY0f3-UirEAIi0nwi79w");'></div>
+<div class="flex-1">
+<p class="font-bold text-dark-charcoal dark:text-dark-charcoal-dark">Alex Doe</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-warm-yellow !text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warm-yellow !text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warm-yellow !text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warm-yellow !text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-warm-yellow !text-xl">star_half</span>
+<span class="text-sm text-gray-600 dark:text-gray-400 ml-1">(12 Reviews)</span>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400">Verified Owner</p>
+</div>
+<a class="text-primary hover:underline text-sm font-bold" href="#">View Profile</a>
+</div>
+</div>
+</div>
+<div class="mt-12">
+<div class="border-b-2 border-light-gray-border dark:border-light-gray-border-dark">
+<nav class="flex gap-8 -mb-0.5 overflow-x-auto">
+<button class="py-4 px-2 border-b-3 border-primary text-primary font-bold text-base whitespace-nowrap">Description</button>
+<button class="py-4 px-2 border-b-3 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 font-semibold text-base transition-all whitespace-nowrap">Specifications</button>
+<button class="py-4 px-2 border-b-3 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-200 font-semibold text-base transition-all whitespace-nowrap">Owner Reviews</button>
+</nav>
+</div>
+<div class="py-8">
+<div class="prose prose-base lg:prose-lg max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
+<p>Capture your world in stunning detail with the Canon EOS R5. This professional-grade full-frame mirrorless camera is perfect for both photographers and videographers who demand the best. It boasts a 45-megapixel CMOS sensor, shoots 8K video, and features an advanced Dual Pixel CMOS AF II system for tack-sharp focus.</p>
+<p>This rental includes the versatile RF 24-70mm f/2.8L IS USM lens, two batteries, a charger, and a 128GB high-speed memory card, all packed in a durable carrying case. The camera is in excellent condition with minimal signs of use.</p>
+<h3 class="text-dark-charcoal dark:text-dark-charcoal-dark font-bold mt-4">Rental Rules</h3>
+<ul class="list-disc pl-5">
+<li>Pickup and return times are flexible but must be coordinated 24 hours in advance.</li>
+<li>Please treat the equipment with care as if it were your own.</li>
+<li>Cancellations within 48 hours of the rental start time are non-refundable.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+<div>
+<h3 class="text-xl font-bold text-dark-charcoal dark:text-dark-charcoal-dark mb-4">Availability</h3>
+<div class="p-4 rounded-xl border border-light-gray-border dark:border-light-gray-border-dark bg-light-gray-bg dark:bg-light-gray-bg-dark shadow-sm">
+<div class="flex flex-col items-center justify-center text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg p-6 min-h-[280px]">
+<span class="material-symbols-outlined text-4xl mb-2">calendar_month</span>
+<p class="font-medium">Interactive Calendar</p>
+<p class="text-sm">This is where the availability calendar would be displayed, allowing users to select dates.</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-bold text-dark-charcoal dark:text-dark-charcoal-dark mb-4">Pickup Location</h3>
+<div class="rounded-xl border border-light-gray-border dark:border-light-gray-border-dark bg-light-gray-bg dark:bg-light-gray-bg-dark shadow-sm overflow-hidden min-h-[312px]">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover" data-alt="A map showing the general pickup area for the item in a city." data-location="San Francisco, California" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuARmXGtq39Qw1ZKkWxdmQBCzBzGFD5GA9OeX69MjqYzcy_a9TqdIM8U3TXbvdhJN4k32DZ3P6V3ZW4e06P0cd-ciCAVJxU2cALooyGlUOMkXWOy70dUDQGaV_UjVqJqYs1za5JwPrcj-e8KXqEwB7JL9CEWqUF_nYdVK-90MvFBeKQseM3Z0eLTAkyN0EUrrFTKVfPpgqAqeTJ8W1DNDxm3r-g77IA-YjmlN3EWs1twQgGd27F0hIigjJdzY47qPRVWmbnARaQqmCU');"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Rent Now Confirmation Modal -->
+<div id="rentModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<div class="bg-white dark:bg-background-dark rounded-xl shadow-2xl max-w-md w-full transform transition-all">
+<div class="p-6 border-b border-light-gray-border dark:border-light-gray-border-dark">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-dark-charcoal dark:text-dark-charcoal-dark">Confirm Rental</h3>
+<button id="closeRentModal" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="p-6">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-20 h-20 bg-center bg-cover rounded-lg" id="rentModalImage"></div>
+<div class="flex-1">
+<h4 class="font-bold text-dark-charcoal dark:text-dark-charcoal-dark mb-1" id="rentModalTitle">Item Name</h4>
+<p class="text-sm text-gray-600 dark:text-gray-400" id="rentModalCategory">Category</p>
+<p class="text-lg font-bold text-primary mt-2" id="rentModalPrice">PKR 0/day</p>
+</div>
+</div>
+<div class="space-y-4 mb-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Start Date</label>
+<input type="date" id="rentStartDate" class="w-full px-4 py-2 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 text-dark-charcoal dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" />
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">End Date</label>
+<input type="date" id="rentEndDate" class="w-full px-4 py-2 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 text-dark-charcoal dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" />
+</div>
+<div class="bg-light-gray-bg dark:bg-light-gray-bg-dark p-4 rounded-lg">
+<div class="flex justify-between items-center mb-2">
+<span class="text-sm text-gray-600 dark:text-gray-400">Duration:</span>
+<span class="font-medium" id="rentalDuration">0 days</span>
+</div>
+<div class="flex justify-between items-center text-lg font-bold">
+<span class="text-dark-charcoal dark:text-dark-charcoal-dark">Total:</span>
+<span class="text-primary" id="rentalTotal">PKR 0</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button id="cancelRentBtn" class="flex-1 px-6 py-3 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark text-dark-charcoal dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition-colors">
+Cancel
+</button>
+<button id="confirmRentBtn" class="flex-1 px-6 py-3 rounded-lg bg-primary text-white font-bold hover:opacity-90 transition-opacity">
+Confirm Rental
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Chat with Owner Modal -->
+<div id="chatModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+<div class="bg-white dark:bg-background-dark rounded-xl shadow-2xl max-w-2xl w-full h-[600px] flex flex-col transform transition-all">
+<div class="p-4 border-b border-light-gray-border dark:border-light-gray-border-dark flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcm8NAmKPVv_WpDsC2TsN75C7NIvzszWwqF9GlODBXFLrFcCNRbr-bo8GJsPUcZn4TIJECxV-_lSGrErKSmx3ivpvanqs05gGVRB8NVXDEn9x5DTjP5_JdLOZ9y4vPDamAcmg4oGmyPZWbN9hbKlpKJ-1DvqBI11qKi56G38JfH1VHUZChz4hKl5U7IGGwWtpIgIKZ4ORzJmGGDbe8sTs8UC6zk8DZRy_a6VkjCu9MpSK7W_9HRpULrOroY0f3-UirEAIi0nwi79w");'></div>
+<div>
+<h3 class="font-bold text-dark-charcoal dark:text-dark-charcoal-dark">Alex Doe</h3>
+<p class="text-xs text-gray-500 dark:text-gray-400">Online</p>
+</div>
+</div>
+<button id="closeChatModal" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900">
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcm8NAmKPVv_WpDsC2TsN75C7NIvzszWwqF9GlODBXFLrFcCNRbr-bo8GJsPUcZn4TIJECxV-_lSGrErKSmx3ivpvanqs05gGVRB8NVXDEn9x5DTjP5_JdLOZ9y4vPDamAcmg4oGmyPZWbN9hbKlpKJ-1DvqBI11qKi56G38JfH1VHUZChz4hKl5U7IGGwWtpIgIKZ4ORzJmGGDbe8sTs8UC6zk8DZRy_a6VkjCu9MpSK7W_9HRpULrOroY0f3-UirEAIi0nwi79w");'></div>
+<div class="flex-1">
+<div class="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-sm">
+<p class="text-sm text-dark-charcoal dark:text-white">Hi! Thanks for your interest in this item. How can I help you?</p>
+</div>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">2 min ago</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-light-gray-border dark:border-light-gray-border-dark">
+<div class="flex gap-3">
+<input type="text" id="chatInput" placeholder="Type your message..." class="flex-1 px-4 py-3 rounded-lg border border-light-gray-border dark:border-light-gray-border-dark bg-white dark:bg-gray-800 text-dark-charcoal dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" />
+<button id="sendMessageBtn" class="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined">send</span>
+Send
+</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+  // Modal functionality
+  const rentModal = document.getElementById('rentModal');
+  const chatModal = document.getElementById('chatModal');
+  const rentNowBtn = document.getElementById('rentNowBtn');
+  const chatOwnerBtn = document.getElementById('chatOwnerBtn');
+  const closeRentModal = document.getElementById('closeRentModal');
+  const closeChatModal = document.getElementById('closeChatModal');
+  const cancelRentBtn = document.getElementById('cancelRentBtn');
+  const confirmRentBtn = document.getElementById('confirmRentBtn');
+  const sendMessageBtn = document.getElementById('sendMessageBtn');
+  const chatInput = document.getElementById('chatInput');
+  const chatMessages = document.getElementById('chatMessages');
+  
+  // Set minimum date to today
+  const today = new Date().toISOString().split('T')[0];
+  const rentStartDate = document.getElementById('rentStartDate');
+  const rentEndDate = document.getElementById('rentEndDate');
+  if (rentStartDate) rentStartDate.min = today;
+  if (rentEndDate) rentEndDate.min = today;
+  
+  // Rent Now button click
+  if (rentNowBtn) {
+    rentNowBtn.addEventListener('click', function() {
+      rentModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      
+      // Populate modal with item data
+      const urlParams = new URLSearchParams(window.location.search);
+      const itemName = urlParams.get('name') || 'Canon EOS R5 Mirrorless Camera';
+      const itemPrice = urlParams.get('price') || '50';
+      const itemCategory = urlParams.get('category') || 'Electronics';
+      const itemImage = urlParams.get('image') || '';
+      
+      document.getElementById('rentModalTitle').textContent = itemName;
+      document.getElementById('rentModalCategory').textContent = itemCategory;
+      document.getElementById('rentModalPrice').textContent = `$${parseFloat(itemPrice).toFixed(2)}/day`;
+      if (itemImage) {
+        document.getElementById('rentModalImage').style.backgroundImage = `url("${itemImage}")`;
+      }
+    });
+  }
+  
+  // Chat with Owner button click
+  if (chatOwnerBtn) {
+    chatOwnerBtn.addEventListener('click', function() {
+      chatModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  
+  // Close modals
+  function closeModal(modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+  
+  if (closeRentModal) {
+    closeRentModal.addEventListener('click', () => closeModal(rentModal));
+  }
+  
+  if (closeChatModal) {
+    closeChatModal.addEventListener('click', () => closeModal(chatModal));
+  }
+  
+  if (cancelRentBtn) {
+    cancelRentBtn.addEventListener('click', () => closeModal(rentModal));
+  }
+  
+  // Close modals when clicking outside
+  rentModal?.addEventListener('click', function(e) {
+    if (e.target === rentModal) closeModal(rentModal);
+  });
+  
+  chatModal?.addEventListener('click', function(e) {
+    if (e.target === chatModal) closeModal(chatModal);
+  });
+  
+  // Calculate rental duration and total
+  function calculateRental() {
+    const startDate = new Date(rentStartDate.value);
+    const endDate = new Date(rentEndDate.value);
+    
+    if (startDate && endDate && endDate >= startDate) {
+      const days = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+      const urlParams = new URLSearchParams(window.location.search);
+      const pricePerDay = parseFloat(urlParams.get('price') || '50');
+      const total = days * pricePerDay;
+      
+      document.getElementById('rentalDuration').textContent = `${days} day${days > 1 ? 's' : ''}`;
+      document.getElementById('rentalTotal').textContent = `$${total.toFixed(2)}`;
+    }
+  }
+  
+  rentStartDate?.addEventListener('change', calculateRental);
+  rentEndDate?.addEventListener('change', calculateRental);
+  
+  // Confirm rental
+  if (confirmRentBtn) {
+    confirmRentBtn.addEventListener('click', function() {
+      const startDate = rentStartDate.value;
+      const endDate = rentEndDate.value;
+      
+      if (!startDate || !endDate) {
+        alert('Please select both start and end dates.');
+        return;
+      }
+      
+      if (new Date(endDate) < new Date(startDate)) {
+        alert('End date must be after start date.');
+        return;
+      }
+      
+      const duration = document.getElementById('rentalDuration').textContent;
+      const total = document.getElementById('rentalTotal').textContent;
+      const itemName = document.getElementById('rentModalTitle').textContent;
+      
+      // Show success message
+      alert(`✅ Rental Confirmed!\n\nItem: ${itemName}\nDuration: ${duration}\nTotal: ${total}\n\nYou will receive a confirmation email shortly.`);
+      
+      closeModal(rentModal);
+      
+      // Reset form
+      rentStartDate.value = '';
+      rentEndDate.value = '';
+      document.getElementById('rentalDuration').textContent = '0 days';
+      document.getElementById('rentalTotal').textContent = '$0.00';
+    });
+  }
+  
+  // Send message functionality
+  function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+    
+    // Add user message
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'flex gap-3 justify-end';
+    messageDiv.innerHTML = `
+      <div class="flex-1 flex justify-end">
+        <div class="bg-primary text-white rounded-lg p-3 shadow-sm max-w-[70%]">
+          <p class="text-sm">${message}</p>
+        </div>
+      </div>
+    `;
+    chatMessages.appendChild(messageDiv);
+    
+    // Clear input
+    chatInput.value = '';
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Simulate owner response after 1 second
+    setTimeout(() => {
+      const responseDiv = document.createElement('div');
+      responseDiv.className = 'flex gap-3';
+      responseDiv.innerHTML = `
+        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcm8NAmKPVv_WpDsC2TsN75C7NIvzszWwqF9GlODBXFLrFcCNRbr-bo8GJsPUcZn4TIJECxV-_lSGrErKSmx3ivpvanqs05gGVRB8NVXDEn9x5DTjP5_JdLOZ9y4vPDamAcmg4oGmyPZWbN9hbKlpKJ-1DvqBI11qKi56G38JfH1VHUZChz4hKl5U7IGGwWtpIgIKZ4ORzJmGGDbe8sTs8UC6zk8DZRy_a6VkjCu9MpSK7W_9HRpULrOroY0f3-UirEAIi0nwi79w");'></div>
+        <div class="flex-1">
+          <div class="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-sm">
+            <p class="text-sm text-dark-charcoal dark:text-white">Thanks for your message! I'll get back to you shortly.</p>
+          </div>
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Just now</p>
+        </div>
+      `;
+      chatMessages.appendChild(responseDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+  }
+  
+  sendMessageBtn?.addEventListener('click', sendMessage);
+  
+  chatInput?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+  
+  // Image gallery functionality
+  const mainImage = document.querySelector('.min-h-\\[480px\\]');
+  const thumbnails = document.querySelectorAll('.aspect-square.bg-cover.rounded-lg.cursor-pointer');
+  
+  thumbnails.forEach((thumb, index) => {
+    thumb.addEventListener('click', function() {
+      const thumbBg = this.style.backgroundImage;
+      if (mainImage) {
+        mainImage.style.backgroundImage = thumbBg;
+      }
+      
+      // Update active thumbnail
+      thumbnails.forEach(t => {
+        t.classList.remove('border-2', 'border-primary', 'opacity-100');
+        t.classList.add('opacity-70');
+      });
+      this.classList.add('border-2', 'border-primary', 'opacity-100');
+      this.classList.remove('opacity-70');
+    });
+  });
+  
+  // Save/Favorite button
+  const saveBtn = document.querySelector('button .material-symbols-outlined.text-red-500');
+  let isSaved = false;
+  if (saveBtn) {
+    saveBtn.parentElement.addEventListener('click', function() {
+      isSaved = !isSaved;
+      if (isSaved) {
+        saveBtn.style.fontVariationSettings = "'FILL' 1";
+        console.log('Item saved');
+      } else {
+        saveBtn.style.fontVariationSettings = "'FILL' 0";
+        console.log('Item removed from favorites');
+      }
+    });
+  }
+  
+  // Rent Now button
+  const rentBtn = document.querySelector('button span.truncate');
+  if (rentBtn && rentBtn.textContent === 'Rent Now') {
+    rentBtn.parentElement.addEventListener('click', function() {
+      console.log('Rent Now clicked');
+      if (confirm('Proceed to rent this item?')) {
+        console.log('Proceeding to booking');
+        // In a real app, would redirect to booking/checkout
+      }
+    });
+  }
+  
+  // Chat with Owner button
+  const chatBtns = document.querySelectorAll('button');
+  chatBtns.forEach(btn => {
+    const span = btn.querySelector('span.truncate');
+    if (span && span.textContent === 'Chat with Owner') {
+      btn.addEventListener('click', function() {
+        console.log('Chat with Owner clicked');
+        // Would open chat interface
+      });
+    }
+  });
+  
+  // Tab switching (Description, Specifications, Reviews)
+  const tabButtons = document.querySelectorAll('nav button');
+  const tabContents = document.querySelectorAll('.py-6');
+  
+  tabButtons.forEach((tab, index) => {
+    tab.addEventListener('click', function() {
+      // Remove active state from all tabs
+      tabButtons.forEach(t => {
+        t.classList.remove('border-primary', 'text-primary', 'font-semibold');
+        t.classList.add('border-transparent', 'text-gray-500', 'font-medium');
+      });
+      
+      // Add active state to clicked tab
+      this.classList.add('border-primary', 'text-primary', 'font-semibold');
+      this.classList.remove('border-transparent', 'text-gray-500', 'font-medium');
+      
+      const tabName = this.textContent.trim();
+      console.log('Tab switched to:', tabName);
+      
+      // In a real app, would show/hide content based on tab
+    });
+  });
+  
+  // Search functionality
+  const searchInput = document.querySelector('input[placeholder*="Search"]');
+  if (searchInput) {
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const query = this.value.trim();
+        if (query) {
+          console.log('Searching for:', query);
+          window.location.href = 'itemlisting.html?search=' + encodeURIComponent(query);
+        }
+      }
+    });
+  }
+  
+  // Header buttons
+  const signUpBtn = document.querySelector('header button span.truncate');
+  if (signUpBtn && signUpBtn.textContent === 'Sign Up') {
+    signUpBtn.parentElement.addEventListener('click', function() {
+      window.location.href = 'signup.html';
+    });
+  }
+  
+  const loginBtns = document.querySelectorAll('header button');
+  loginBtns.forEach(btn => {
+    const span = btn.querySelector('span.truncate');
+    if (span && span.textContent === 'Log In') {
+      btn.addEventListener('click', function() {
+        window.location.href = 'Login.html';
+      });
+    }
+  });
+  
+  // Breadcrumb navigation
+  const breadcrumbLinks = document.querySelectorAll('.flex.flex-wrap.gap-2 a');
+  breadcrumbLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const linkText = this.textContent.trim();
+      if (linkText === 'Home') {
+        window.location.href = 'home.html';
+      } else if (linkText === 'Electronics') {
+        window.location.href = 'itemlisting.html?category=electronics';
+      }
+    });
+  });
+  
+  // View Profile link
+  const viewProfileLink = document.querySelector('a[href="#"]');
+  if (viewProfileLink && viewProfileLink.textContent.includes('View Profile')) {
+    viewProfileLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('View Profile clicked');
+    });
+  }
+  
+  // Mobile menu
+  const menuBtn = document.querySelector('button .material-symbols-outlined');
+  if (menuBtn && menuBtn.textContent === 'menu') {
+    menuBtn.parentElement.addEventListener('click', function() {
+      console.log('Mobile menu clicked');
+    });
+  }
+  
+  // Load item details from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const itemData = {
+    id: urlParams.get('id'),
+    name: urlParams.get('name'),
+    price: urlParams.get('price'),
+    category: urlParams.get('category'),
+    rating: urlParams.get('rating'),
+    status: urlParams.get('status'),
+    image: urlParams.get('image'),
+    description: urlParams.get('description')
+  };
+  
+  // Update page with item data if available
+  if (itemData.id && itemData.name) {
+    console.log('Loading item:', itemData.name);
+    
+    // Update title and breadcrumb
+    const titleElement = document.querySelector('h1');
+    if (titleElement) {
+      titleElement.textContent = itemData.name;
+    }
+    
+    const categoryBreadcrumb = document.querySelectorAll('.flex.flex-wrap.gap-2 a')[1];
+    const itemNameBreadcrumb = document.querySelectorAll('.flex.flex-wrap.gap-2 span')[2];
+    if (categoryBreadcrumb) {
+      categoryBreadcrumb.textContent = itemData.category;
+    }
+    if (itemNameBreadcrumb) {
+      itemNameBreadcrumb.textContent = itemData.name;
+    }
+    
+    // Update subtitle
+    const subtitle = document.querySelector('h1 + p');
+    if (subtitle) {
+      subtitle.textContent = `${itemData.category} - ${itemData.status}`;
+    }
+    
+    // Update main image
+    const mainImage = document.querySelector('.min-h-\\[480px\\]');
+    if (mainImage && itemData.image) {
+      mainImage.style.backgroundImage = `url("${itemData.image}")`;
+    }
+    
+    // Update all thumbnail images with the same image
+    const thumbnails = document.querySelectorAll('.aspect-square.bg-cover.rounded-lg.cursor-pointer');
+    thumbnails.forEach((thumb, index) => {
+      if (itemData.image) {
+        thumb.style.backgroundImage = `url("${itemData.image}")`;
+        // First thumbnail should have active border
+        if (index === 0) {
+          thumb.classList.add('border-2', 'border-primary');
+        } else {
+          thumb.classList.remove('border-2', 'border-primary');
+        }
+      }
+    });
+    
+    // Update price
+    const priceElement = document.querySelector('.text-3xl.font-bold');
+    if (priceElement && itemData.price) {
+      priceElement.textContent = `PKR ${Math.round(parseFloat(itemData.price))}`;
+    }
+    
+    // Update description
+    const descriptionParagraph = document.querySelector('.prose p');
+    if (descriptionParagraph && itemData.description) {
+      descriptionParagraph.textContent = itemData.description;
+    }
+    
+    // Update status badge (if you add one)
+    const statusIndicators = document.querySelectorAll('.bg-available, .bg-rented');
+    statusIndicators.forEach(indicator => {
+      if (itemData.status === 'Available') {
+        indicator.classList.remove('bg-rented');
+        indicator.classList.add('bg-available');
+        indicator.textContent = 'Available';
+      } else if (itemData.status === 'Rented') {
+        indicator.classList.remove('bg-available');
+        indicator.classList.add('bg-rented');
+        indicator.textContent = 'Rented';
+      }
+    });
+  } else {
+    console.log('No item data in URL, showing default item');
+  }
+  
+  // Calendar interaction placeholder
+  const calendarArea = document.querySelector('.min-h-\\[280px\\]');
+  if (calendarArea) {
+    calendarArea.style.cursor = 'pointer';
+    calendarArea.addEventListener('click', function() {
+      console.log('Calendar clicked');
+    });
+  }
+  
+  // Map interaction
+  const mapArea = document.querySelector('.min-h-\\[312px\\]');
+  if (mapArea) {
+    mapArea.style.cursor = 'pointer';
+    mapArea.addEventListener('click', function() {
+      console.log('Map clicked');
+    });
+  }
+</script>
+<script src="js/theme.js"></script>
+
+</body></html>

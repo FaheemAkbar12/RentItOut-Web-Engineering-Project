@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RentItOut - List Your Item</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13b6ec",
+                        "secondary": "#2C3E50",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#101d22",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Sidebar animations */
+        .sidebar {
+            transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+        }
+        
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 50;
+                height: 100vh;
+            }
+        }
+        
+        /* Smooth hover effects */
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            transform: translateX(4px);
+        }
+        
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 70%;
+            background: #13b6ec;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        /* Overlay for mobile */
+        .sidebar-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-secondary dark:text-white">
+<!-- Mobile overlay -->
+<div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden sidebar-overlay"></div>
+
+<div class="relative flex min-h-screen w-full group/design-root overflow-x-hidden">
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar w-64 flex-shrink-0 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col shadow-lg md:shadow-none">
+<!-- Logo Header -->
+<div class="flex items-center justify-between px-6 h-16 border-b border-gray-200 dark:border-gray-800">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-gray-900 dark:text-white text-lg font-bold">RentItOut</h2>
+</div>
+<!-- Close button for mobile -->
+<button id="closeSidebar" class="md:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-y-auto p-4 space-y-1">
+<a href="home.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
+<span class="material-symbols-outlined text-xl">home</span>
+<span>Home</span>
+</a>
+<a href="itemlisting.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+<span>Rent Out</span>
+</a>
+<a href="add.html" class="nav-link active flex items-center gap-3 rounded-lg px-4 py-3 bg-primary/10 text-primary font-bold group">
+<span class="material-symbols-outlined text-xl">add_box</span>
+<span>Rent In</span>
+</a>
+<a href="addride.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
+<span class="material-symbols-outlined text-xl">add_road</span>
+<span>Post Ride</span>
+</a>
+<a href="travel.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
+<span class="material-symbols-outlined text-xl">directions_car</span>
+<span>Travel Sharing</span>
+</a>
+<a href="userddash.html" class="nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-base font-medium group">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span>Dashboard</span>
+</a>
+</nav>
+
+<!-- User Profile Section -->
+<div class="mt-auto border-t border-gray-200 dark:border-gray-800 p-4">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer">
+<div class="bg-gradient-to-br from-primary to-blue-500 rounded-full size-10 flex items-center justify-center text-white font-bold">
+FA
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200 truncate">Faheem Akbar</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 truncate">fammyalpha@gmail.com</p>
+</div>
+<button class="flex items-center justify-center rounded-lg h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 text-xl">more_vert</span>
+</button>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col">
+<header class="flex w-full items-center justify-between border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 sticky top-0 z-30">
+<div class="flex items-center gap-4 px-4 sm:px-6 py-3 w-full">
+<!-- Mobile menu button -->
+<button id="menuToggle" class="md:hidden flex items-center justify-center rounded-lg h-10 w-10 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-gray-700 dark:text-gray-300">menu</span>
+</button>
+
+<div class="flex-1"></div>
+
+<div class="flex items-center gap-2">
+<button class="hidden sm:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="truncate">List an Item</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-gray-700 dark:text-gray-300">notifications</span>
+</button>
+<div class="bg-gradient-to-br from-primary to-blue-500 rounded-full size-10 flex items-center justify-center text-white font-bold cursor-pointer">
+FA
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-8 px-4 sm:px-8">
+<div class="layout-content-container flex flex-col w-full max-w-4xl flex-1">
+<div class="mb-6">
+<h1 class="text-3xl font-black text-gray-900 dark:text-white mb-2">Rent In - List Your Item</h1>
+<p class="text-gray-600 dark:text-gray-400">Share your items and earn by renting them out</p>
+</div>
+<div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-sm space-y-6">
+<div class="space-y-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Item Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="col-span-2">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Item Name *</label>
+<input id="itemName" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" placeholder="e.g., Canon EOS R5 Camera" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category *</label>
+<select id="category" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+<option value="">Select category</option>
+<option value="Electronics">Electronics</option>
+<option value="Cameras">Cameras & Photography</option>
+<option value="Tools">Tools & Equipment</option>
+<option value="Sports">Sports & Outdoor</option>
+<option value="Vehicles">Vehicles</option>
+<option value="Party">Party & Events</option>
+<option value="Books">Books & Education</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Condition</label>
+<select id="condition" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+<option value="new">New</option>
+<option value="excellent">Excellent</option>
+<option value="good" selected>Good</option>
+<option value="fair">Fair</option>
+</select>
+</div>
+<div class="col-span-2">
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description *</label>
+<textarea id="itemDescription" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary min-h-32" placeholder="Describe your item in detail..."></textarea>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Location</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">City *</label>
+<select id="locationCity" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+<option value="">Select city</option>
+<option>Karachi</option>
+<option>Lahore</option>
+<option>Islamabad</option>
+<option>Rawalpindi</option>
+<option>Faisalabad</option>
+<option>Multan</option>
+<option>Peshawar</option>
+<option>Quetta</option>
+<option>Sialkot</option>
+<option>Gujranwala</option>
+<option>Hyderabad</option>
+<option>Abbottabad</option>
+<option>Murree</option>
+<option>Gilgit</option>
+<option>Skardu</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">State/Province</label>
+<select id="locationState" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+<option value="">Select province</option>
+<option>Sindh</option>
+<option>Punjab</option>
+<option>Khyber Pakhtunkhwa</option>
+<option>Balochistan</option>
+<option>Gilgit-Baltistan</option>
+<option>Azad Kashmir</option>
+</select>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Pricing & Terms</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rental Price (PKR) *</label>
+<div class="relative">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+<span class="text-gray-500 dark:text-gray-400 text-sm">PKR</span>
+</div>
+<input id="price" class="w-full pl-16 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" placeholder="0" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rental Duration *</label>
+<select id="priceUnit" class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary">
+<option value="day">Per Day</option>
+<option value="hour">Per Hour</option>
+<option value="week">Per Week</option>
+<option value="month">Per Month</option>
+</select>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Availability</h2>
+<div class="flex items-center justify-between bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+<p class="text-gray-700 dark:text-gray-300 font-medium">Availability Status</p>
+<div class="flex items-center gap-4">
+<span class="text-gray-500 dark:text-gray-400 text-sm">Unavailable</span>
+<button id="availabilityToggle" aria-checked="true" class="bg-primary relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" role="switch" type="button">
+<span class="translate-x-5 pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</button>
+<span class="text-green-600 dark:text-green-400 font-semibold text-sm">Available</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Photos</h2>
+<div class="flex justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 px-6 py-10 hover:border-primary transition-colors">
+<div class="text-center">
+<span class="material-symbols-outlined text-5xl text-gray-400 dark:text-gray-500">cloud_upload</span>
+<div class="mt-4 flex text-sm leading-6 text-gray-600 dark:text-gray-400">
+<label class="relative cursor-pointer rounded-md font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/80 focus-within:ring-offset-2 hover:text-primary/80" for="file-upload">
+<span>Upload files</span>
+<input class="sr-only" id="file-upload" name="file-upload" type="file" multiple accept="image/*"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs leading-5 text-gray-500 dark:text-gray-500">PNG, JPG, GIF up to 5MB each</p>
+</div>
+</div>
+<div id="imagePreview" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"></div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-end gap-4 pt-6">
+<button type="button" id="cancelBtn" class="w-full sm:w-auto px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+Cancel
+</button>
+<button type="submit" id="submitBtn" class="w-full sm:w-auto px-6 py-3 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition-colors">
+List Item
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+<script>
+  // Form inputs
+  const itemNameInput = document.getElementById('itemName');
+  const itemDescInput = document.getElementById('itemDescription');
+  const categorySelect = document.getElementById('category');
+  const conditionSelect = document.getElementById('condition');
+  const priceInput = document.getElementById('price');
+  const durationSelect = document.getElementById('priceUnit');
+  const locationCity = document.getElementById('locationCity');
+  const locationState = document.getElementById('locationState');
+  const availabilityToggle = document.getElementById('availabilityToggle');
+  const fileUpload = document.getElementById('file-upload');
+  const imagePreview = document.getElementById('imagePreview');
+  const submitBtn = document.getElementById('submitBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  
+  // Availability toggle
+  let isAvailable = true;
+  if (availabilityToggle) {
+    availabilityToggle.addEventListener('click', function() {
+      isAvailable = !isAvailable;
+      const toggle = this.querySelector('span');
+      const statusText = this.parentElement.querySelectorAll('span');
+      
+      if (isAvailable) {
+        toggle.classList.add('translate-x-5');
+        toggle.classList.remove('translate-x-0');
+        this.classList.remove('bg-gray-200', 'dark:bg-gray-600');
+        this.classList.add('bg-primary');
+        console.log('Item set to Available');
+      } else {
+        toggle.classList.remove('translate-x-5');
+        toggle.classList.add('translate-x-0');
+        this.classList.add('bg-gray-200', 'dark:bg-gray-600');
+        this.classList.remove('bg-primary');
+        console.log('Item set to Rented Out');
+      }
+    });
+  }
+  
+  // File upload handler with preview
+  if (fileUpload) {
+    fileUpload.addEventListener('change', function(e) {
+      const files = e.target.files;
+      if (files.length > 0) {
+        console.log('Files selected:', files.length, Array.from(files).map(f => f.name));
+        displayImagePreviews(files);
+      }
+    });
+  }
+  
+  // Display image previews
+  function displayImagePreviews(files) {
+    imagePreview.innerHTML = '';
+    Array.from(files).forEach((file, index) => {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const div = document.createElement('div');
+          div.className = 'relative group';
+          div.innerHTML = `
+            <img src="${e.target.result}" class="w-full h-24 object-cover rounded-lg" alt="Preview ${index + 1}">
+            <button type="button" onclick="removeImage(${index})" class="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+          `;
+          imagePreview.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+  
+  // Drag and drop functionality
+  const dropZone = document.querySelector('.border-dashed');
+  if (dropZone) {
+    dropZone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      this.classList.add('border-primary', 'bg-primary/5');
+    });
+    
+    dropZone.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      this.classList.remove('border-primary', 'bg-primary/5');
+    });
+    
+    dropZone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      this.classList.remove('border-primary', 'bg-primary/5');
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        console.log('Files dropped:', files.length);
+        fileUpload.files = files;
+      }
+    });
+  }
+  
+  // Form validation
+  function validateForm() {
+    const itemName = itemNameInput?.value.trim();
+    const itemDesc = itemDescInput?.value.trim();
+    const category = categorySelect?.value;
+    const price = priceInput?.value.trim();
+    const city = locationCity?.value;
+    
+    if (!itemName) {
+      alert('Please enter item name');
+      itemNameInput?.focus();
+      return false;
+    }
+    
+    if (!category) {
+      alert('Please select a category');
+      categorySelect?.focus();
+      return false;
+    }
+    
+    if (!itemDesc) {
+      alert('Please enter item description');
+      itemDescInput?.focus();
+      return false;
+    }
+    
+    if (!price || parseFloat(price) <= 0) {
+      alert('Please enter a valid price');
+      priceInput?.focus();
+      return false;
+    }
+    
+    if (!city) {
+      alert('Please select a city');
+      locationCity?.focus();
+      return false;
+    }
+    
+    return true;
+  }
+  
+  // Form submission - save to localStorage and redirect
+  if (submitBtn) {
+    submitBtn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      
+      // Validate form
+      const itemName = itemNameInput?.value.trim();
+      const itemDescription = itemDescInput?.value.trim();
+      const category = categorySelect?.value;
+      const condition = conditionSelect?.value;
+      const price = priceInput?.value.trim();
+      const priceUnit = durationSelect?.value;
+      const city = locationCity?.value;
+      const state = locationState?.value;
+      
+      if (!itemName || !itemDescription || !category || !price || !city) {
+        alert('Please fill in all required fields (marked with *)');
+        return;
+      }
+      
+      // Get existing items from localStorage or initialize empty array
+      const existingItems = JSON.parse(localStorage.getItem('rentitout_items') || '[]');
+      
+      // Create new item object
+      const newItem = {
+        id: Date.now().toString(),
+        name: itemName,
+        description: itemDescription,
+        category: category,
+        condition: condition,
+        price: parseFloat(price),
+        priceUnit: priceUnit,
+        city: city,
+        state: state,
+        status: isAvailable ? 'Available' : 'Rented',
+        rating: '0.0',
+        image: 'https://via.placeholder.com/400x300?text=' + encodeURIComponent(itemName),
+        createdAt: new Date().toISOString(),
+        userId: localStorage.getItem('userId') || 'guest',
+        userName: localStorage.getItem('userName') || 'Guest User'
+      };
+      
+      // Add new item to the beginning of array
+      existingItems.unshift(newItem);
+      
+      // Save back to localStorage
+      localStorage.setItem('rentitout_items', JSON.stringify(existingItems));
+      
+      console.log('Item saved:', newItem);
+      
+      // Redirect to item listing page
+      window.location.href = 'itemlisting.html?new=true';
+    });
+  }
+  
+  // Cancel button
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (confirm('Are you sure you want to cancel? All changes will be lost.')) {
+        window.location.href = 'itemlisting.html';
+      }
+    });
+  }
+  
+  // Price input formatting
+  if (priceInput) {
+    priceInput.addEventListener('input', function() {
+      let value = this.value.replace(/[^0-9.]/g, '');
+      const parts = value.split('.');
+      if (parts.length > 2) {
+        value = parts[0] + '.' + parts.slice(1).join('');
+      }
+      if (parts[1] && parts[1].length > 2) {
+        value = parts[0] + '.' + parts[1].substring(0, 2);
+      }
+      this.value = value;
+    });
+  }
+  
+  // Character counter for description
+  if (itemDescInput) {
+    const maxChars = 500;
+    const counterDiv = document.createElement('div');
+    counterDiv.className = 'text-sm text-gray-500 dark:text-gray-400 mt-1';
+    counterDiv.textContent = '0 / ' + maxChars + ' characters';
+    itemDescInput.parentElement.appendChild(counterDiv);
+    
+    itemDescInput.addEventListener('input', function() {
+      const length = this.value.length;
+      counterDiv.textContent = length + ' / ' + maxChars + ' characters';
+      
+      if (length > maxChars) {
+        counterDiv.classList.add('text-red-500');
+        this.value = this.value.substring(0, maxChars);
+      } else {
+        counterDiv.classList.remove('text-red-500');
+      }
+    });
+  }
+  
+  // ===== SIDEBAR TOGGLE FUNCTIONALITY =====
+  const sidebar = document.getElementById('sidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  const menuToggle = document.getElementById('menuToggle');
+  const closeSidebar = document.getElementById('closeSidebar');
+  
+  // Open sidebar on mobile
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.remove('sidebar-hidden');
+      sidebarOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  
+  // Close sidebar on mobile
+  function closeSidebarFunc() {
+    sidebar.classList.add('sidebar-hidden');
+    sidebarOverlay.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+  
+  if (closeSidebar) {
+    closeSidebar.addEventListener('click', closeSidebarFunc);
+  }
+  
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', closeSidebarFunc);
+  }
+  
+  // Close sidebar on route navigation (mobile)
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 768) {
+        closeSidebarFunc();
+      }
+    });
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      sidebar.classList.remove('sidebar-hidden');
+      sidebarOverlay.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    } else {
+      sidebar.classList.add('sidebar-hidden');
+    }
+  });
+  
+  // Initialize sidebar state on mobile
+  if (window.innerWidth < 768) {
+    sidebar.classList.add('sidebar-hidden');
+  }
+</script>
+
+<!-- API and Auth Integration Scripts -->
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/theme.js"></script>
+
+</body></html>

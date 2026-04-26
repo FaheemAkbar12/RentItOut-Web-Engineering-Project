@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static Mode Info - RentItOut</title>
+    <link href="css/custom.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class"
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 p-8">
+    <!-- Dark Mode Toggle -->
+    <button id="themeToggle" class="fixed top-4 right-4 z-50 theme-toggle" aria-label="Toggle dark mode">
+      <div class="theme-toggle-circle">
+        <span class="material-symbols-outlined text-sm text-yellow-500 dark:text-gray-700">light_mode</span>
+      </div>
+    </button>
+    
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-gradient-to-r from-primary to-purple-600 text-white rounded-2xl shadow-xl p-8 mb-8">
+            <div class="flex items-center gap-4 mb-4">
+                <span class="material-symbols-outlined text-5xl">info</span>
+                <h1 class="text-4xl font-bold">RentItOut - Static Mode</h1>
+            </div>
+            <p class="text-lg opacity-90">This website operates independently without a backend server.</p>
+        </div>
+        
+        <div class="glass p-6 rounded-xl mb-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-green-500">check_circle</span>
+                Status: Fully Functional
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-green-50 dark:bg-green-900/20 border-2 border-green-200 dark:border-green-800 rounded-lg p-4">
+                    <span class="material-symbols-outlined text-3xl text-green-600 mb-2">cloud_off</span>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">No Backend Required</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">All data stored locally in your browser</p>
+                </div>
+                <div class="bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                    <span class="material-symbols-outlined text-3xl text-blue-600 mb-2">storage</span>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">LocalStorage Powered</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Data persists across sessions</p>
+                </div>
+                <div class="bg-purple-50 dark:bg-purple-900/20 border-2 border-purple-200 dark:border-purple-800 rounded-lg p-4">
+                    <span class="material-symbols-outlined text-3xl text-purple-600 mb-2">speed</span>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Instant Performance</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">No network latency</p>
+                </div>
+                <div class="bg-orange-50 dark:bg-orange-900/20 border-2 border-orange-200 dark:border-orange-800 rounded-lg p-4">
+                    <span class="material-symbols-outlined text-3xl text-orange-600 mb-2">devices</span>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Offline Ready</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Works without internet</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-xl mb-6">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined">architecture</span>
+                How It Works
+            </h2>
+            <div class="space-y-4">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl">save</span>
+                    <div>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-200">Data Storage</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">All items, rides, and bookings are saved in your browser's localStorage</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl">shield</span>
+                    <div>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-200">Authentication</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Simple session management without external auth providers</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-2xl">palette</span>
+                    <div>
+                        <h3 class="font-semibold text-gray-800 dark:text-gray-200">Theme Persistence</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Dark mode preference synced across all pages</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-xl">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined">terminal</span>
+                Storage Information
+            </h2>
+            <div id="storageInfo" class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg font-mono text-sm overflow-auto">
+                <div class="text-green-600 dark:text-green-400">Loading storage data...</div>
+            </div>
+            <button onclick="clearAllData()" class="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center gap-2">
+                <span class="material-symbols-outlined">delete</span>
+                Clear All Local Data
+            </button>
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="home.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold">
+                <span class="material-symbols-outlined">home</span>
+                Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Display storage information
+        function displayStorageInfo() {
+            const storageDiv = document.getElementById('storageInfo');
+            const storage = {
+                items: JSON.parse(localStorage.getItem('rentitout_items') || '[]'),
+                travel: JSON.parse(localStorage.getItem('rentitout_travel') || '[]'),
+                localRides: JSON.parse(localStorage.getItem('localRides') || '[]'),
+                bookings: JSON.parse(localStorage.getItem('rentitout_bookings') || '[]'),
+                user: {
+                    isLoggedIn: localStorage.getItem('isLoggedIn'),
+                    email: localStorage.getItem('userEmail'),
+                    theme: localStorage.getItem('theme')
+                }
+            };
+
+            storageDiv.innerHTML = `
+                <div class="space-y-2">
+                    <div class="text-blue-600 dark:text-blue-400 font-bold">📦 Storage Summary:</div>
+                    <div class="ml-4">
+                        <div>✓ Items: ${storage.items.length} items</div>
+                        <div>✓ Travel Posts: ${storage.travel.length + storage.localRides.length} rides</div>
+                        <div>✓ Bookings: ${storage.bookings.length} bookings</div>
+                        <div>✓ User Session: ${storage.user.isLoggedIn === 'true' ? 'Active (' + storage.user.email + ')' : 'Not logged in'}</div>
+                        <div>✓ Theme: ${storage.user.theme || 'light'} mode</div>
+                    </div>
+                    <div class="mt-4 text-gray-600 dark:text-gray-400">
+                        <div>💾 Total localStorage usage: ~${(JSON.stringify(localStorage).length / 1024).toFixed(2)} KB</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function clearAllData() {
+            if (confirm('⚠️ This will delete all your local data including items, rides, and bookings. Continue?')) {
+                const theme = localStorage.getItem('theme'); // Preserve theme
+                localStorage.clear();
+                if (theme) localStorage.setItem('theme', theme);
+                alert('✅ All data cleared! Theme preference preserved.');
+                displayStorageInfo();
+            }
+        }
+
+        // Update storage info every 2 seconds
+        displayStorageInfo();
+        setInterval(displayStorageInfo, 2000);
+    </script>
+    <script src="js/theme.js"></script>
+</body>
+</html>
